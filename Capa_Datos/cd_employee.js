@@ -17,7 +17,7 @@ class CD_Employee {
         return { message:message, rows:rows };
     }
 
-    async getEmployees4() {
+    async getEmployees2() {
         var message = "";
         var rows;
         try {
