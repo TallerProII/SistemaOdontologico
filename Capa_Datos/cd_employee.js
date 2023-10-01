@@ -16,6 +16,18 @@ class CD_Employee {
         }
         return { message:message, rows:rows };
     }
+    async getEmployees2() {
+        var message = "";
+        var rows;
+        try {
+            // Tu código asíncrono aquí, por ejemplo, una operación de base de datos
+            [rows] = await pool.query("SELECT * FROM employee");
+        } catch (error) {
+            message = "Algo salió mal en CD";
+            rows = [];
+        }
+        return { message:message, rows:rows };
+    }
 }
 
 // Exporta la clase CD_Employee para que pueda ser importada en otros archivos.
@@ -29,3 +41,4 @@ export default CD_Employee;
 //     return res.status(500).json({ message: "Something goes wrong" });
 //   }
 // };
+
