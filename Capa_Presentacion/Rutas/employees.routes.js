@@ -3,11 +3,15 @@ import {
   // createEmployee,
   // deleteEmployee,
   // getEmployee,
+  index,
   getEmployees
   // updateEmployee,
 } from "../Controladores/employees.controller.js";
 
 const router = Router();
+
+//Index
+router.get("/", index);
 
 // GET all Employees
 router.get("/employees", getEmployees);
