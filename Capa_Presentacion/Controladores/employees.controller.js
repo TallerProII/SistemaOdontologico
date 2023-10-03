@@ -2,17 +2,39 @@
 import CN_Employee from "../../Capa_Negocio/cn_employee.js";
 
 export const index = (req, res) => res.json({ message: "welcome to my api" });
+var objEmployee = new CN_Employee();
 
 export const getEmployees = async (req, res) => {
-  
-  const objEmployee = new CN_Employee();
   try {
-    const rows = await objEmployee.getEmployees();
-    res.json(rows);
+    const respuesta = await objEmployee.getEmployees();
+    res.json(respuesta);
   } catch (error) {
-    return res.status(500).json({ message: "Something goes wrong in CP" });
+    return res.status(500).json({ message: "Algo salió mal en CP" });
   }
 };
+
+export const createEmployee = async (req, res) => {
+  try {
+    const { name, salary } = req.body;
+    const respuesta = await objEmployee.createEmployee(name,salary);
+    res.status(201).json({ id: respuesta.id, name, salary });
+  } catch (error) {
+    return res.status(500).json({ message: "Algo salió mal en CP" });
+  }
+};
+
+// export const createEmployee = async (req, res) => {
+//   try {
+//     const { name, salary } = req.body;
+//     const [rows] = await pool.query(
+//       "INSERT INTO employee (name, salary) VALUES (?, ?)",
+//       [name, salary]
+//     );
+//     res.status(201).json({ id: rows.insertId, name, salary });
+//   } catch (error) {
+//     return res.status(500).json({ message: "Something goes wrong" });
+//   }
+// };
 
 // export const getEmployees = async (req, res) => {
 //   try {

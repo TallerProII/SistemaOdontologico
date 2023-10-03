@@ -1,10 +1,10 @@
 import { Router } from "express";
 import {
-  // createEmployee,
-  // deleteEmployee,
-  // getEmployee,
+  createEmployee,
   index,
   getEmployees
+    // deleteEmployee,
+  // getEmployee,
   // updateEmployee,
 } from "../Controladores/employees.controller.js";
 
@@ -14,16 +14,16 @@ const router = Router();
 router.get("/", index);
 
 // GET all Employees
-router.get("/employees", getEmployees);
+router.get("/getEmployees", getEmployees);
+
+// INSERT An Employee
+router.post("/createEmployee", createEmployee);
 
 // GET An Employee
 // router.get("/employees/:id", getEmployee);
 
 // // DELETE An Employee
 // router.delete("/employees/:id", deleteEmployee);
-
-// // INSERT An Employee
-// router.post("/employees", createEmployee);
 
 // router.patch("/employees/:id", updateEmployee);
 

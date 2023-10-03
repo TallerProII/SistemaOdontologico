@@ -8,26 +8,27 @@ class CD_Employee {
         var message = "";
         var rows;
         try {
-            // Tu código asíncrono aquí, por ejemplo, una operación de base de datos
+            // codigo asincorno, consulta sql listar empleados
             [rows] = await pool.query("SELECT * FROM employee");
         } catch (error) {
             message = "Algo salió mal en CD";
             rows = [];
         }
-        return { message:message, rows:rows };
+        return { message: message, rows: rows };
     }
 
-    async getEmployees2() {
+    async createEmployee(name,salary) {
         var message = "";
-        var rows;
+        var id;
         try {
-            // Tu código asíncrono aquí, por ejemplo, una operación de base de datos
-            [rows] = await pool.query("SELECT * FROM employee");
+            // codigo asincorno, consulta sql registrar clientes
+            [id] = await pool.query(
+            "INSERT INTO employee (name, salary) VALUES (?, ?)", [name, salary]);
         } catch (error) {
             message = "Algo salió mal en CD";
-            rows = [];
+            id = 0;
         }
-        return { message:message, rows:rows };
+        return { message: message, id: id.insertId};
     }
 }
 // Exporta la clase CD_Employee para que pueda ser importada en otros archivos.
