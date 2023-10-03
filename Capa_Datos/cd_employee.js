@@ -21,7 +21,7 @@ class CD_Employee {
         var message = "";
         var id;
         try {
-            // codigo asincorno, consulta sql registrar clientes
+            // codigo asincorno, consulta sql registrar empleados
             [id] = await pool.query(
             "INSERT INTO employee (name, salary) VALUES (?, ?)", [name, salary]);
         } catch (error) {
