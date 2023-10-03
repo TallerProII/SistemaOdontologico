@@ -12,22 +12,8 @@ class CN_Employee {
     async createEmployee(name,salary) {
         //filtos - reglas de negocio
 
-
         return await objCapaDato.createEmployee(name,salary);
     }
-
-    // export const createEmployee = async (req, res) => {
-    //     try {
-    //         const { name, salary } = req.body;
-    //         const [rows] = await pool.query(
-    //         "INSERT INTO employee (name, salary) VALUES (?, ?)",
-    //         [name, salary]
-    //         );
-    //         res.status(201).json({ id: rows.insertId, name, salary });
-    //     } catch (error) {
-    //         return res.status(500).json({ message: "Something goes wrong" });
-    //     }
-    // };
 
 }
 

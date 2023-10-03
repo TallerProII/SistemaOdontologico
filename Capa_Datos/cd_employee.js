@@ -19,24 +19,33 @@ class CD_Employee {
 
     async createEmployee(name,salary) {
         var message = "";
-        var id;
+        var result;
         try {
             // codigo asincorno, consulta sql registrar empleados
-            [id] = await pool.query(
+            [result] = await pool.query(
             "INSERT INTO employee (name, salary) VALUES (?, ?)", [name, salary]);
         } catch (error) {
             message = "Algo salió mal en CD";
-            id = 0;
+            result.insertId = 0;
         }
-        return { message: message, id: id.insertId};
-    }
+        return { message: message, id: result.insertId};
+    }    
+
+    // export const deleteEmployee = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const [rows] = await pool.query("DELETE FROM employee WHERE id = ?", [id]);
+
+//     if (rows.affectedRows <= 0) {
+//       return res.status(404).json({ message: "Employee not found" });
+//     }
+
+//     res.sendStatus(204);
+//   } catch (error) {
+//     return res.status(500).json({ message: "Something goes wrong" });
+//   }
+// };
 }
 // Exporta la clase CD_Employee para que pueda ser importada en otros archivos.
 export default CD_Employee;
 
-// export const getEmployees = async (req, res) => {
-//   try {
-//     const [rows] = await pool.query("SELECT * FROM employee");
-//     res.json(rows);
-//   } catch (error) {
-//     return res.status(500).json({ message: "Something goes wrong" });
