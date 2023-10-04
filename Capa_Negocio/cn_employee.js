@@ -11,14 +11,43 @@ class CN_Employee {
 
     async createEmployee(name,salary) {
         //filtos - reglas de negocio
+        var message = "";
 
-        return await objCapaDato.createEmployee(name,salary);
+        if (!name || name.trim().length === 0) {
+            Mensaje = "El nombre del cliente no puede ser vacío";
+        } else if (!salary || salary.trim().length === 0) {
+            Mensaje = "El apellido del cliente no puede ser vacío";
+        } //else if (!Correo || Correo.trim().length === 0) {
+        //     Mensaje = "El correo del cliente no puede ser vacío";
+        // }
+
+        if(!message){
+            return await objCapaDato.createEmployee(name,salary);
+        }
+        return 0;
     }
     
     async deleteEmployee(id) {
         //filtos - reglas de negocio
 
         return await objCapaDato.deleteEmployee(id);
+    }
+
+    async updateEmployee(id, name, salary) {
+        //filtos - reglas de negocio
+
+        if (!name || name.trim().length === 0) {
+            Mensaje = "El nombre del cliente no puede ser vacío";
+        } else if (!salary || salary.trim().length === 0) {
+            Mensaje = "El apellido del cliente no puede ser vacío";
+        } //else if (!Correo || Correo.trim().length === 0) {
+        //     Mensaje = "El correo del cliente no puede ser vacío";
+        // }        
+        
+        if(!message){
+            return await objCapaDato.createEmployee(name,salary);
+        }
+        return 0;
     }
 
 }

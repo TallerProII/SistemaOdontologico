@@ -44,16 +44,41 @@ class CD_Employee {
         return { message: message, affectedRows: result.affectedRows};
     }
 
-    // export const deleteEmployee = async (req, res) => {
+    async updateEmployee(id, name, salary) {
+        var message = "";
+        var result;
+
+        try {
+            [result] = await pool.query(
+            "UPDATE employee SET name = IFNULL(?, name), salary = IFNULL(?, salary) WHERE id = ?",
+            [name, salary, id]);
+
+        } catch (error) {
+            message = "Algo salió mal en CD";
+            result.affectedRows = 0;
+        }
+
+        return { message: message, affectedRows: result.affectedRows};
+    }
+
+    // export const updateEmployee = async (req, res) => {
 //   try {
 //     const { id } = req.params;
-//     const [rows] = await pool.query("DELETE FROM employee WHERE id = ?", [id]);
+//     const { name, salary } = req.body;
 
-//     if (rows.affectedRows <= 0) {
+//     const [result] = await pool.query(
+//       "UPDATE employee SET name = IFNULL(?, name), salary = IFNULL(?, salary) WHERE id = ?",
+//       [name, salary, id]
+//     );
+
+//     if (result.affectedRows === 0)
 //       return res.status(404).json({ message: "Employee not found" });
-//     }
 
-//     res.sendStatus(204);
+//     const [rows] = await pool.query("SELECT * FROM employee WHERE id = ?", [
+//       id,
+//     ]);
+
+//     res.json(rows[0]);
 //   } catch (error) {
 //     return res.status(500).json({ message: "Something goes wrong" });
 //   }

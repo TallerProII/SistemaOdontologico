@@ -3,9 +3,9 @@ import {
   createEmployee,
   index,
   getEmployees,
-  deleteEmployee
+  deleteEmployee,  
+  updateEmployee
   // getEmployee,
-  // updateEmployee,
 } from "../Controladores/employees.controller.js";
 
 const router = Router();
@@ -13,18 +13,20 @@ const router = Router();
 //Index
 router.get("/", index);
 
-// GET all Employees
+// GET todos los empleados
 router.get("/getEmployees", getEmployees);
 
-// INSERT An Employee
+// INSERT un empleado
 router.post("/createEmployee", createEmployee);
 
-// GET An Employee
-// router.get("/employees/:id", getEmployee);
-
-// // DELETE An Employee
+// DELETE un empleado
 router.delete("/deleteEmployees/:id", deleteEmployee);
 
-// router.patch("/employees/:id", updateEmployee);
+// UPDATE un empleado
+router.patch("/updateEmployee/:id", updateEmployee);
+
+// GET un empleado
+// router.get("/employees/:id", getEmployee);
+
 
 export default router;
