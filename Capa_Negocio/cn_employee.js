@@ -14,6 +14,12 @@ class CN_Employee {
 
         return await objCapaDato.createEmployee(name,salary);
     }
+    
+    async deleteEmployee(id) {
+        //filtos - reglas de negocio
+
+        return await objCapaDato.deleteEmployee(id);
+    }
 
 }
 

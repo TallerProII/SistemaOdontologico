@@ -31,6 +31,19 @@ class CD_Employee {
         return { message: message, id: result.insertId};
     }    
 
+    async deleteEmployee(id) {
+        var message = "";
+        var result;
+        try {
+            // codigo asincorno, consulta sql registrar empleados
+            [result] = await pool.query("DELETE FROM employee WHERE id = ?", [id]);
+        } catch (error) {
+            message = "Algo salió mal en CD";
+            result.affectedRows = 0;
+        }
+        return { message: message, affectedRows: result.affectedRows};
+    }
+
     // export const deleteEmployee = async (req, res) => {
 //   try {
 //     const { id } = req.params;

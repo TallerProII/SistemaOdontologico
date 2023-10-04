@@ -2,8 +2,8 @@ import { Router } from "express";
 import {
   createEmployee,
   index,
-  getEmployees
-    // deleteEmployee,
+  getEmployees,
+  deleteEmployee
   // getEmployee,
   // updateEmployee,
 } from "../Controladores/employees.controller.js";
@@ -23,7 +23,7 @@ router.post("/createEmployee", createEmployee);
 // router.get("/employees/:id", getEmployee);
 
 // // DELETE An Employee
-// router.delete("/employees/:id", deleteEmployee);
+router.delete("/deleteEmployees/:id", deleteEmployee);
 
 // router.patch("/employees/:id", updateEmployee);
 
