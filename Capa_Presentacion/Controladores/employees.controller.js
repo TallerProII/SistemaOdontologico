@@ -34,8 +34,7 @@ export const deleteEmployee = async (req, res) => {
     if (result.affectedRows <= 0) {
       return res.status(404).json({ message: result.message });
     }
-    res.sendStatus(204);
-    res.json(result);
+    res.status(204).json(result);
   } catch (error) {
     return res.status(500).json({ message: "Algo salió mal en CP" });
   }
@@ -52,9 +51,10 @@ export const updateEmployee = async (req, res) => {
     if (result.affectedRows === 0)
       return res.status(404).json({ message: result.message });
 
-    const [rows] = await pool.query("SELECT * FROM employee WHERE id = ?", [id]);
+    res.json(result);
+    // const [rows] = await pool.query("SELECT * FROM employee WHERE id = ?", [id]);
 
-    res.json(rows[0]);
+    // res.json(rows[0]);
   } catch (error) {
     return res.status(500).json({ message: "Algo salió mal en CP" });
   }

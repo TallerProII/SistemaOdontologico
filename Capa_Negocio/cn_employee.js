@@ -43,6 +43,7 @@ class CN_Employee {
     //ACTUALIZAR
     async updateEmployee(id, name, salary) {
         //filtos - reglas de negocio
+        var message = "";
 
         if(typeof name !== "string" || typeof salary !== "number"){
             message = "Error en el tipo de dato ingresado"
@@ -58,7 +59,7 @@ class CN_Employee {
         }        
         
         if(!message){
-            return await objCapaDato.createEmployee(id,name,salary);
+            return await objCapaDato.updateEmployee(id,name,salary);
         }
         return { message: message, id: 0};
     }
