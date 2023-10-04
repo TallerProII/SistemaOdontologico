@@ -4,50 +4,63 @@ var objCapaDato = new CD_Employee();
 
 class CN_Employee {
 
-    //sintaxis de un metodo asincrono
+    //LISTAR
     async getEmployees() {
         return await objCapaDato.getEmployees();
     }
 
+    //CREAR
     async createEmployee(name,salary) {
         //filtos - reglas de negocio
         var message = "";
 
-        if (!name || name.trim().length === 0) {
-            Mensaje = "El nombre del cliente no puede ser vacío";
-        } else if (!salary || salary.trim().length === 0) {
-            Mensaje = "El apellido del cliente no puede ser vacío";
-        } //else if (!Correo || Correo.trim().length === 0) {
-        //     Mensaje = "El correo del cliente no puede ser vacío";
-        // }
+        if(typeof name !== "string" || typeof salary !== "number"){
+            message = "Error en el tipo de dato ingresado"
+        }
+        else{
+            if (!name || name.trim().length === 0) {
+                Mensaje = "El nombre del cliente no puede ser vacío";
+            } else if (!salary || salary == 0) {
+                Mensaje = "El salario del cliente no puede ser vacío o cero";
+            } //else if (!Correo || Correo.trim().length === 0) {
+            //     Mensaje = "El correo del cliente no puede ser vacío";
+            // }
+        }
 
         if(!message){
             return await objCapaDato.createEmployee(name,salary);
         }
-        return 0;
+        return { message: message, id: 0};
     }
     
+    //ELIMINAR
     async deleteEmployee(id) {
         //filtos - reglas de negocio
 
         return await objCapaDato.deleteEmployee(id);
     }
 
+    //ACTUALIZAR
     async updateEmployee(id, name, salary) {
         //filtos - reglas de negocio
 
-        if (!name || name.trim().length === 0) {
-            Mensaje = "El nombre del cliente no puede ser vacío";
-        } else if (!salary || salary.trim().length === 0) {
-            Mensaje = "El apellido del cliente no puede ser vacío";
-        } //else if (!Correo || Correo.trim().length === 0) {
-        //     Mensaje = "El correo del cliente no puede ser vacío";
-        // }        
+        if(typeof name !== "string" || typeof salary !== "number"){
+            message = "Error en el tipo de dato ingresado"
+        }
+        else{
+            if (!name || name.trim().length === 0) {
+                Mensaje = "El nombre del cliente no puede ser vacío";
+            } else if (!salary || salary == 0) {
+                Mensaje = "El salario del cliente no puede ser vacío o cero";
+            } //else if (!Correo || Correo.trim().length === 0) {
+            //     Mensaje = "El correo del cliente no puede ser vacío";
+            // }
+        }        
         
         if(!message){
-            return await objCapaDato.createEmployee(name,salary);
+            return await objCapaDato.createEmployee(id,name,salary);
         }
-        return 0;
+        return { message: message, id: 0};
     }
 
 }
