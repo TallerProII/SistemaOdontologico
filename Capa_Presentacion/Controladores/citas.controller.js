@@ -21,3 +21,14 @@ export const updateCita = async (req, res) => {
       return res.status(500).json({ message: "Algo salió mal en CP" });
     }
   };
+
+  // CREAR
+export const createCita = async (req, res) => {
+  try {
+      const { pacienteId, medicoId, estado, tratamiento, observaciones, fecha, hora } = req.body;
+      const result = await objCNCita.createCita(pacienteId, medicoId, estado, tratamiento, observaciones, fecha, hora);
+      res.status(201).json({ id: result.id });
+  } catch (error) {
+      return res.status(500).json({ message: "Algo salió mal en CP" });
+  }
+};
