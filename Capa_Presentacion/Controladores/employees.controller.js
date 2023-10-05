@@ -4,7 +4,7 @@ import CN_Employee from "../../Capa_Negocio/cn_employee.js";
 export const index = (req, res) => res.json({ message: "welcome to my api" });
 var objEmployee = new CN_Employee();
 
-//LISTAR
+//LISTAR E
 export const getEmployees = async (req, res) => {
   try {
     const respuesta = await objEmployee.getEmployees();
