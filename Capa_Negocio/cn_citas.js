@@ -20,33 +20,29 @@ class CN_Cita {
         }
 
         if (!message) {
-            
-            return await objCapaDato.createCita(idPaciente,idMedico,estado,tratamiento,observaciones,fecha,hora);
+            return await objCapaDato.createCita(pacienteId, medicoId, estado, tratamiento, observaciones, fecha, hora);
         }
-        
         return { message: message, id: 0 };
     }
 
     //ACTUALIZAR CITA
-    async updateCita(id, name, salary) {
+    async updateCita(id, pacienteId, medicoId, estado, tratamiento, observaciones, fecha, hora) {
         //filtos - reglas de negocio
         var message = "";
 
-        if(typeof name !== "string" || typeof salary !== "number"){
+        if(typeof pacienteId !== "number" || typeof medicoId !== "number" || typeof estado !== "string" ||
+            typeof tratamiento !== "string" || typeof observaciones !== "string" || typeof fecha !== "string" ||
+            typeof hora !== "string"){
             message = "Error en el tipo de dato ingresado"
         }
         else{
-            if (!name || name.trim().length === 0) {
-                Mensaje = "El nombre del cliente no puede ser vacío";
-            } else if (!salary || salary == 0) {
-                Mensaje = "El salario del cliente no puede ser vacío o cero";
-            } //else if (!Correo || Correo.trim().length === 0) {
-            //     Mensaje = "El correo del cliente no puede ser vacío";
-            // }
+            if (!pacienteId || !medicoId || !estado || !tratamiento || !observaciones || !fecha || !hora) {
+                message = "Todos los campos son obligatorios";
+            }
         }        
         
         if(!message){
-            return await objCapaDato.updateCita(id,name,salary);
+            return await objCapaDato.updateCita(id,pacienteId, medicoId, estado, tratamiento, observaciones, fecha, hora);
         }
         return { message: message, id: 0};
     }

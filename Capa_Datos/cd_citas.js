@@ -8,26 +8,26 @@ class CD_Cita {
         try {
             // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(
-                "INSERT INTO tblCita (idPaciente, idMedico, citEst, citTrat, citObs, citRegist, citFecha, citHora) VALUES (?, ?, ?, ?, ?, NOW(), ?, ?)",
+                "CALL crear_cita(?, ?, ?, ?, ?, ?, ?)",
                 [pacienteId, medicoId, estado, tratamiento, observaciones, fecha, hora]
             );
         } catch (error) {
             message = "Algo salió mal en CD";
             result.insertId = 0;
         }
-        return { message: message, id: result.insertId };
+        return { message: message, affectedRows: result.affectedRows };
     }
 
 
     //ACTUALIZAR
-    async updateCita(id, name, salary) {
+    async updateCita(id, pacienteId, medicoId, estado, tratamiento, observaciones, fecha, hora) {
         var message = "";
         var result;
 
         try {
             [result] = await pool.query(
-            "UPDATE employee SET name = IFNULL(?, name), salary = IFNULL(?, salary) WHERE id = ?",
-            [name, salary, id]);
+            "UPDATE tblCita  SET idPaciente = ?, idMedico = ?, citEst = ?, citTrat = ?, citObs = ?, citFecha = ?, citHora = ? WHERE idCita = ?",
+            [pacienteId, medicoId, estado, tratamiento, observaciones, fecha, hora, id]);
 
         } catch (error) {
             message = "Algo salió mal en CD";
