@@ -46,6 +46,10 @@ class CN_Cita {
         }
         return { message: message, id: 0};
     }
+    //ELIMINAR
+async deleteEliminar(id) {
+    return await objCapaDato.deleteEliminar(id);
+  }
 }
 
 export default CN_Cita;
