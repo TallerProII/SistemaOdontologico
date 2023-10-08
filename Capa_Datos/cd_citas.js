@@ -38,6 +38,20 @@ class CD_Cita {
     }
 
 
+    //LISTAR
+    async listCita() {
+        var message = "";
+        var rows;
+        try {
+            // codigo asincorno, consulta sql listar empleados
+            [rows] = await pool.query("SELECT * FROM tblCita");
+        } catch (error) {
+            message = "Algo salió mal en CD";
+            rows = [];
+        }
+        return { message: message, rows: rows };
+    }
+
 }
 
 export default CD_Cita;
