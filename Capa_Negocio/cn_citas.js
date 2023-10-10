@@ -50,6 +50,11 @@ class CN_Cita {
 async deleteEliminar(id) {
     return await objCapaDato.deleteEliminar(id);
   }
+    //LISTAR CITA
+    async listCita() {
+        return await objCapaDato.listCita();
+    }
+
 }
 
 export default CN_Cita;

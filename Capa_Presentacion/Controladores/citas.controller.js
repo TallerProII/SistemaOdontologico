@@ -49,3 +49,13 @@ export const deleteEliminar = async (req, res) => {
     return res.status(500).json({ message: "Algo salió mal en CP" });
   }
 };
+//Listar cita
+export const listCita = async (req, res) => {
+  try {
+    const respuesta = await objCita.listCita();
+    res.json(respuesta);
+  } catch (error) {
+    return res.status(500).json({ message: "Algo salió mal en CP" });
+  }
+};
+
