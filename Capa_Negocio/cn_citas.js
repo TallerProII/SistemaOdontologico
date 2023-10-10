@@ -47,9 +47,9 @@ class CN_Cita {
         return { message: message, id: 0};
     }
     //ELIMINAR
-async deleteEliminar(id) {
-    return await objCapaDato.deleteEliminar(id);
-  }
+    async deleteCita(id) {
+        return await objCapaDato.deleteCita(id);
+    }
     //LISTAR CITA
     async listCita() {
         return await objCapaDato.listCita();

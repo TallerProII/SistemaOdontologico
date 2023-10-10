@@ -37,18 +37,18 @@ class CD_Cita {
         return { message: message, affectedRows: result.affectedRows};
     }
 
- //ELIMINAR
- async deleteEliminar(id) {
-    var message = "";
-    var result;
-    try {
-        [result] = await pool.query("DELETE FROM employee WHERE id = ?", [id]);
-    } catch (error) {
-        message = "Algo salió mal en CD";
-        result.affectedRows = 0;
+    //ELIMINAR
+    async deleteCita(id) {
+        var message = "";
+        var result;
+        try {
+            [result] = await pool.query("DELETE FROM tblCita WHERE idCita = ?", [id]);
+        } catch (error) {
+            message = "Algo salió mal en CD";
+            result.affectedRows = 0;
+        }
+        return { message: message, affectedRows: result.affectedRows};
     }
-    return { message: message, affectedRows: result.affectedRows};
-}
 
     //LISTAR
     async listCita() {

@@ -2,7 +2,8 @@ import { Router } from "express";
 import {
   createCita,
   listCita,
-  updateCita
+  updateCita,
+  deleteCita
 } from "../Controladores/citas.controller.js";
 
 const router = Router();
@@ -14,6 +15,8 @@ router.post("/createCita", createCita);
 router.patch("/updateCita/:id", updateCita);
 //Listar cita
 router.get("/listCita", listCita);
+// DELETE un empleado
+router.delete("/deleteCita/:id", deleteCita);
 
 
 

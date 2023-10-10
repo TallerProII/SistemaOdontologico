@@ -36,10 +36,10 @@ export const createCita = async (req, res) => {
 
 //ELIMINAR
 
-export const deleteEliminar = async (req, res) => {
+export const deleteCita = async (req, res) => {
   try {
     const { id } = req.params;
-    const result = await objEliminar.deleteEliminar(id);
+    const result = await objCita.deleteCita(id);
 
     if (result.affectedRows <= 0) {
       return res.status(404).json({ message: result.message });
