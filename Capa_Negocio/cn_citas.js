@@ -29,13 +29,13 @@ class CN_Cita {
         //filtos - reglas de negocio
         var message = "";
 
-        if(typeof medicoId !== "number" || typeof estado !== "string" ||
+        if(typeof medicoId !== "number" || typeof estado !== "number" ||
             typeof tratamiento !== "string" || typeof fecha !== "string" ||
             typeof hora !== "string"){
             message = "Error en el tipo de dato ingresado"
         }
         else{
-            if (!pacienteId || !medicoId || !estado || !tratamiento || !fecha || !hora) {
+            if (!medicoId || !estado || !tratamiento || !fecha || !hora) {
                 message = "Todos los campos son obligatorios";
             }
         }        

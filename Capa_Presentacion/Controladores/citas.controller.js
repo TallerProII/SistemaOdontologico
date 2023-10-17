@@ -17,10 +17,10 @@ export const createCita = async (req, res) => {
 //ACTUALIZAR CITA
 export const updateCita = async (req, res) => {
   try {
-    const { idCita } = req.params;  //const id = req.params.id;
+    const { id } = req.params;  //const id = req.params.id;
     const { medicoId, estado, tratamiento, fecha, hora } = req.body;
 
-    const result = await objCita.updateCita(idCita, medicoId, estado, tratamiento, fecha, hora);
+    const result = await objCita.updateCita(id, medicoId, estado, tratamiento, fecha, hora);
 
     if (result.affectedRows === 0)
       return res.status(404).json({ message: result.message });
@@ -38,8 +38,8 @@ export const updateCita = async (req, res) => {
 
 export const deleteCita = async (req, res) => {
   try {
-    const { idCita } = req.params;
-    const result = await objCita.deleteCita(idCita);
+    const { id } = req.params;
+    const result = await objCita.deleteCita(id);
 
     if (result.affectedRows <= 0) {
       return res.status(404).json({ message: result.message });

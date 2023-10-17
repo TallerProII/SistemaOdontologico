@@ -26,8 +26,8 @@ class CD_Cita {
 
         try {
             [result] = await pool.query(
-            "UPDATE tblCitas  SET idMedico = ?, citEstad = ?, citDesc = ?, citFech = ?, citHora = ? WHERE idCita = ?",
-            [ medicoId, estado, tratamiento, fecha, hora, idCita]);
+            "call editar_cita(?,?,?,?,?,?);",
+            [ idCita,medicoId, estado, tratamiento, fecha, hora]);
 
         } catch (error) {
             message = "Algo salió mal en CD";
@@ -42,7 +42,7 @@ class CD_Cita {
         var message = "";
         var result;
         try {
-            [result] = await pool.query("DELETE FROM tblCitas WHERE idCita = ?", [idCita]);
+            [result] = await pool.query("call eliminar_cita (?);", [idCita]);
         } catch (error) {
             message = "Algo salió mal en CD";
             result.affectedRows = 0;
@@ -56,7 +56,7 @@ class CD_Cita {
         var rows;
         try {
             // codigo asincorno, consulta sql listar empleados
-            [rows] = await pool.query("SELECT * FROM tblCitas");
+            [rows] = await pool.query("call listar_cita();");
         } catch (error) {
             message = "Algo salió mal en CD";
             rows = [];
