@@ -5,50 +5,49 @@ var objCapaDato = new CD_Cita();
 class CN_Cita {
 
     // CREAR
-    async createCita(pacienteId, medicoId, estado, tratamiento, observaciones, fecha, hora) {
+    async createCita(pacienteId, medicoId, tratamiento, fecha, hora) {
         // Validaciones
         var message = "";
 
-        if (typeof pacienteId !== "number" || typeof medicoId !== "number" || typeof estado !== "string" ||
-            typeof tratamiento !== "string" || typeof observaciones !== "string" || typeof fecha !== "string" ||
-            typeof hora !== "string") {
+        if (typeof pacienteId !== "number" || typeof medicoId !== "number" || typeof tratamiento !== "string" 
+            || typeof fecha !== "string" || typeof hora !== "string") {
             message = "Error en el tipo de dato ingresado";
         } else {
-            if (!pacienteId || !medicoId || !estado || !tratamiento || !observaciones || !fecha || !hora) {
+            if (!pacienteId || !medicoId || !tratamiento || !fecha || !hora) {
                 message = "Todos los campos son obligatorios";
             }
         }
 
         if (!message) {
-            return await objCapaDato.createCita(pacienteId, medicoId, estado, tratamiento, observaciones, fecha, hora);
+            return await objCapaDato.createCita(pacienteId, medicoId, tratamiento, fecha, hora);
         }
         return { message: message, id: 0 };
     }
 
     //ACTUALIZAR CITA
-    async updateCita(id, pacienteId, medicoId, estado, tratamiento, observaciones, fecha, hora) {
+    async updateCita(idCita, medicoId, estado, tratamiento, fecha, hora) {
         //filtos - reglas de negocio
         var message = "";
 
-        if(typeof pacienteId !== "number" || typeof medicoId !== "number" || typeof estado !== "string" ||
-            typeof tratamiento !== "string" || typeof observaciones !== "string" || typeof fecha !== "string" ||
+        if(typeof medicoId !== "number" || typeof estado !== "string" ||
+            typeof tratamiento !== "string" || typeof fecha !== "string" ||
             typeof hora !== "string"){
             message = "Error en el tipo de dato ingresado"
         }
         else{
-            if (!pacienteId || !medicoId || !estado || !tratamiento || !observaciones || !fecha || !hora) {
+            if (!pacienteId || !medicoId || !estado || !tratamiento || !fecha || !hora) {
                 message = "Todos los campos son obligatorios";
             }
         }        
         
         if(!message){
-            return await objCapaDato.updateCita(id,pacienteId, medicoId, estado, tratamiento, observaciones, fecha, hora);
+            return await objCapaDato.updateCita(idCita, medicoId, estado, tratamiento, fecha, hora);
         }
         return { message: message, id: 0};
     }
     //ELIMINAR
-    async deleteCita(id) {
-        return await objCapaDato.deleteCita(id);
+    async deleteCita(idCita) {
+        return await objCapaDato.deleteCita(idCita);
     }
     //LISTAR CITA
     async listCita() {

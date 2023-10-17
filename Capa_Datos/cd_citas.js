@@ -2,14 +2,14 @@ import { pool } from "./Conexion DB/conection-db.js";
 class CD_Cita {
 
     // CREAR
-    async createCita(pacienteId, medicoId, estado, tratamiento, observaciones, fecha, hora) {
+    async createCita(pacienteId, medicoId, tratamiento, fecha, hora) {
         var message = "";
         var result;
         try {
             // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(
-                "CALL crear_cita(?, ?, ?, ?, ?, ?, ?)",
-                [pacienteId, medicoId, estado, tratamiento, observaciones, fecha, hora]
+                "CALL crear_cita(?, ?, ?, ?, ?)",
+                [pacienteId, medicoId, tratamiento, fecha, hora]
             );
         } catch (error) {
             message = "Algo salió mal en CD";
@@ -20,14 +20,14 @@ class CD_Cita {
 
 
     //ACTUALIZAR
-    async updateCita(id, pacienteId, medicoId, estado, tratamiento, observaciones, fecha, hora) {
+    async updateCita(idCita, medicoId, estado, tratamiento, fecha, hora) {
         var message = "";
         var result;
 
         try {
             [result] = await pool.query(
-            "UPDATE tblCita  SET idPaciente = ?, idMedico = ?, citEst = ?, citTrat = ?, citObs = ?, citFecha = ?, citHora = ? WHERE idCita = ?",
-            [pacienteId, medicoId, estado, tratamiento, observaciones, fecha, hora, id]);
+            "UPDATE tblCitas  SET idMedico = ?, citEstad = ?, citDesc = ?, citFech = ?, citHora = ? WHERE idCita = ?",
+            [ medicoId, estado, tratamiento, fecha, hora, idCita]);
 
         } catch (error) {
             message = "Algo salió mal en CD";
@@ -38,11 +38,11 @@ class CD_Cita {
     }
 
     //ELIMINAR
-    async deleteCita(id) {
+    async deleteCita(idCita) {
         var message = "";
         var result;
         try {
-            [result] = await pool.query("DELETE FROM tblCita WHERE idCita = ?", [id]);
+            [result] = await pool.query("DELETE FROM tblCitas WHERE idCita = ?", [idCita]);
         } catch (error) {
             message = "Algo salió mal en CD";
             result.affectedRows = 0;
@@ -56,7 +56,7 @@ class CD_Cita {
         var rows;
         try {
             // codigo asincorno, consulta sql listar empleados
-            [rows] = await pool.query("SELECT * FROM tblCita");
+            [rows] = await pool.query("SELECT * FROM tblCitas");
         } catch (error) {
             message = "Algo salió mal en CD";
             rows = [];
