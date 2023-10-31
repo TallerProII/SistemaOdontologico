@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<!-- Coding by CodingLab | www.codinglabweb.com -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!----===== Boxicons CSS ===== -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <!--<title>Dashboard Sidebar Menu</title>-->
+  </head>
+  <body>
+    <nav class="sidebar">
+      <header>
+        <div class="image-text">
+          <span class="image">
+            <!--<img src="logo.png" alt="">-->
+          </span>
+
+          <div class="text logo-text">
+            <span class="name">Citas</span>
+          </div>
+        </div>
+      </header>
+      <div class="menu-profile">
+        <div class="menu-profile-img">
+          <img
+            src="https://www.dzoom.org.es/wp-content/uploads/2020/02/portada-foto-perfil-redes-sociales-consejos-810x540.jpg"
+            alt=""
+          />
+        </div>
+        <h1>Luis Marcos</h1>
+        <h5>Admin</h5>
+      </div>
+      <div class="menu-bar">
+        <div class="menu">
+          <ul class="menu-links">
+            <li class="nav-link">
+              <a href="#">
+                <i class="bx bx-home-alt icon"></i>
+                <span class="text nav-text">Dashboard</span>
+              </a>
+            </li>
+
+            <li class="nav-link">
+              <a href="/citas.html">
+                <i class="bx bx-bar-chart-alt-2 icon"></i>
+                <span class="text nav-text">Citas</span>
+              </a>
+            </li>
+
+            <li class="nav-link">
+              <a href="/detalle-odontograma.html">
+                <i class="bx bx-bell icon"></i>
+                <span class="text nav-text">Detalle Odontograma</span>
+              </a>
+            </li>
+
+            <li class="nav-link">
+              <a href="/tratamiento.html">
+                <i class="bx bx-pie-chart-alt icon"></i>
+                <span class="text nav-text">Tratamiento</span>
+              </a>
+            </li>
+
+            <li class="nav-link">
+              <a href="/historial-medico.html">
+                <i class="bx bx-heart icon"></i>
+                <span class="text nav-text">Historial médico</span>
+              </a>
+            </li>
+
+            <li class="nav-link">
+              <a href="/calendario.html">
+                <i class="bx bx-wallet icon"></i>
+                <span class="text nav-text">Calendario</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bottom-content">
+          <li class="">
+            <a href="#">
+              <i class="bx bx-log-out icon"></i>
+              <span class="text nav-text">Cerrar sesión</span>
+            </a>
+          </li>
+
+          <li class="mode">
+            <div class="sun-moon">
+              <i class="bx bx-moon icon moon"></i>
+              <i class="bx bx-sun icon sun"></i>
+            </div>
+            <span class="mode-text text">Dark mode</span>
+
+            <div class="toggle-switch">
+              <span class="switch"></span>
+            </div>
+          </li>
+        </div>
+      </div>
+    </nav>
+
+    <section class="home">
+      <div class="text">
+        <div>
+          <i class="bx bx-menu toggle"></i>
+        </div>
+        <div>Dashboard Sidebar</div>
+      </div>
+      <div class="home-body">
+        
+        <div id="calendar"></div>
+        
+      </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+    <script src="citas.js"></script>
+  </body>
+</html>
