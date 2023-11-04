@@ -39,7 +39,7 @@ class CN_Employee {
 
         return await objCapaDato.deleteEmployee(id);
     }
-
+    //Utilizar estos cambios 
     //ACTUALIZAR
     async updateEmployee(id, name, salary) {
         //filtos - reglas de negocio
