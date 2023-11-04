@@ -15,7 +15,11 @@ class CN_Employee {
         var message = "";
 
         if(typeof name !== "string" || typeof salary !== "number"){
-            message = "Error en el tipo de dato ingresado"
+            if(typeof name !== "string"){
+                message = "Error en el tipo de dato ingresado, el nombre debe ser un texto"
+            } else if (typeof salary !== "number"){
+                message = "Error en el tipo de dato ingresado, el salario debe ser un número"
+            }
         }
         else{
             if (!name || name.trim().length === 0) {
