@@ -1,7 +1,7 @@
 import { config } from "dotenv";
 config();
 
-// BD alojado en Azure
+// BD alojado en Azure --
 export const PORT = process.env.PORT || 3000;
 export const DB_HOST = process.env.DB_HOST || "server-mysql202302.mysql.database.azure.com";
 export const DB_USER = process.env.DB_USER || "GeovanyDelaCruz";
