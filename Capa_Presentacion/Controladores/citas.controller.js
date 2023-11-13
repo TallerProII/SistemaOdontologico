@@ -2,12 +2,20 @@ import CN_Cita from "../../Capa_Negocio/cn_citas.js";
 
 var objCita = new CN_Cita();
 
+//Listar cita
+export const listCita = async (req, res) => {
+  try {
+    const respuesta = await objCita.listCita();
+    res.json(respuesta);
+  } catch (error) {
+    return res.status(500).json({ message: "Algo salió mal en CP" });
+  }
+};
 // CREAR
 export const createCita = async (req, res) => {
   try {
-    const { pacienteId, medicoId, tratamiento, fecha, hora } = req.body;
-    console.log(typeof pacienteId, typeof medicoId, typeof tratamiento,typeof fecha,typeof hora); 
-    const result = await objCita.createCita(pacienteId, medicoId, tratamiento, fecha, hora);
+    const { IDHistoria, IDMedico, citMotivo, citFecha, citHora, citEstado } = req.body;
+    const result = await objCita.createCita( IDHistoria, IDMedico, citMotivo, citFecha, citHora, citEstado);
     res.status(201).json({ result });
   } catch (error) {
     return res.status(500).json({ message: "Algo salió mal en CP" });
@@ -49,13 +57,5 @@ export const deleteCita = async (req, res) => {
     return res.status(500).json({ message: "Algo salió mal en CP" });
   }
 };
-//Listar cita
-export const listCita = async (req, res) => {
-  try {
-    const respuesta = await objCita.listCita();
-    res.json(respuesta);
-  } catch (error) {
-    return res.status(500).json({ message: "Algo salió mal en CP" });
-  }
-};
+
 
