@@ -1,25 +1,16 @@
 import CD_HistoriaClinica from "../Capa_Datos/cd_historiaClinica.js";
 
-var objCapaDato = new CD_HistoriaClinica();
+const objCapaDato = new CD_HistoriaClinica();
 
 class CN_HistoriaClinica {
   // CREAR
   async createHistoriaClinica(idPaciente, fecha, descripcion, diagnostico, tratamiento) {
-    // Validaciones
-    var message = "";
+    let message = "";
 
-    if (
-      typeof idPaciente !== "number" ||
-      typeof fecha !== "string" ||
-      typeof descripcion !== "string" ||
-      typeof diagnostico !== "string" ||
-      typeof tratamiento !== "string"
-    ) {
+    if (typeof idPaciente !== "number" || typeof fecha !== "string" || typeof descripcion !== "string" || typeof diagnostico !== "string" || typeof tratamiento !== "string") {
       message = "Error en el tipo de dato ingresado";
-    } else {
-      if (!idPaciente || !fecha || !descripcion || !diagnostico || !tratamiento) {
-        message = "Todos los campos son obligatorios";
-      }
+    } else if (!idPaciente || !fecha || !descripcion || !diagnostico || !tratamiento) {
+      message = "Todos los campos son obligatorios";
     }
 
     if (!message) {
@@ -31,21 +22,12 @@ class CN_HistoriaClinica {
 
   // ACTUALIZAR
   async updateHistoriaClinica(id, idPaciente, fecha, descripcion, diagnostico, tratamiento) {
-    // Filtros y reglas de negocio
-    var message = "";
+    let message = "";
 
-    if (
-      typeof idPaciente !== "number" ||
-      typeof fecha !== "string" ||
-      typeof descripcion !== "string" ||
-      typeof diagnostico !== "string" ||
-      typeof tratamiento !== "string"
-    ) {
+    if (typeof idPaciente !== "number" || typeof fecha !== "string" || typeof descripcion !== "string" || typeof diagnostico !== "string" || typeof tratamiento !== "string") {
       message = "Error en el tipo de dato ingresado";
-    } else {
-      if (!idPaciente || !fecha || !descripcion || !diagnostico || !tratamiento) {
-        message = "Todos los campos son obligatorios";
-      }
+    } else if (!idPaciente || !fecha || !descripcion || !diagnostico || !tratamiento) {
+      message = "Todos los campos son obligatorios";
     }
 
     if (!message) {
