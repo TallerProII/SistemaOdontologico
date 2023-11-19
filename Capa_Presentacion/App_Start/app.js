@@ -7,6 +7,7 @@ import presRoutes from "../Rutas/pres.routes.js"
 import historiaClinica from "../Rutas/historiaClinica.routes.js";
 import detalleOdontograma from "../Rutas/detalleOdontograma.routes.js";
 import familiar from "../Rutas/familiar.routes.js";
+import paciente from "../Rutas/paciente.routes.js";
 
 const app = express();
 
@@ -21,9 +22,10 @@ app.use("/pres", presRoutes );
 app.use("/historiaClinica", historiaClinica );
 app.use("/detalleodontograma", detalleOdontograma );
 app.use("/familiar", familiar );
+app.use("/paciente", paciente );
 
 app.use((req, res, next) => {
-  res.status(404).json({ message: "Not found" });
+  res.status(404).json({ message: "ERROR 404: Not found" });
 });
 
 export default app;

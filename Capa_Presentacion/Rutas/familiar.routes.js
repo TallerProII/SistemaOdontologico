@@ -9,13 +9,13 @@ import {
 const router = Router();
 
 
-// Crear una cita
+// Crear familiar
 router.post("/createFamiliar", createFamiliar);
-//Actualizar cita
+//Actualizar familiar
 router.patch("/updateFamiliar/:id", updateFamiliar);
-//Listar cita
+//Listar familiar
 router.get("/listFamiliar/:DNI", listFamiliar);
-// DELETE un empleado
+// DELETE familiar
 router.delete("/deleteFamiliar/:id", deleteFamiliar);
 
 

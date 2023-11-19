@@ -4,63 +4,53 @@ var objCapaDato = new CD_familiar();
 
 class CN_familiar {
 
-    //LISTAR
-    async listFamiliar(DNI) {
-        return await objCapaDato.listFamiliar(DNI);
+  validarCampo = (campo, nombreCampo) => {
+    if (!campo || campo.trim().length === 0) {
+      return `El campo ${nombreCampo} no puede quedar vacío`;
+    }
+    return null;
+  };
+
+  validarString = (campo, nombreCampo) => {
+    const mensajeCampoVacio = this.validarCampo(campo, nombreCampo);
+    if (mensajeCampoVacio) {
+      return mensajeCampoVacio;
     }
 
-    // CREAR CITA
-    async createFamiliar( DNI, nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono) {
-        // Validaciones
-        var message = "";
+    if (typeof campo !== "string") {
+      return `Error en el tipo de dato ingresado, el ${nombreCampo} debe ser un texto`;
+    }
+    return null;
+  };
 
-        if (typeof DNI !== "string" || typeof nombres  !== "string" || typeof apellidos !== "string" 
-        || typeof DNIF !== "string" || typeof parentezco !== "string" || typeof ocupacion !== "string" 
-        || typeof correo !== "string" || typeof telefono !== "string") {
-            if (typeof DNI !== "string") {
-                message = "Error en el tipo de dato ingresado, el DNI del paciente debe ser un texto";
-            } else if (typeof nombres !== "string") {
-                message = "Error en el tipo de dato ingresado, el nombres debe ser un número";
-            } else if (typeof apellidos !== "string") {
-                message = "Error en el tipo de dato ingresado, el apellidos debe ser un número";
-            } else if (typeof DNIF !== "string") {
-                message = "Error en el tipo de dato ingresado, el DNIF debe ser un número";
-            } else if (typeof parentezco !== "string") {
-                message = "Error en el tipo de dato ingresado, el parentezco debe ser un texto";
-            } else if (typeof ocupacion !== "string") {
-                message = "Error en el tipo de dato ingresado, el ocupacion debe ser un texto";
-            } else if (typeof correo !== "string") {
-                message = "Error en el tipo de dato ingresado, el correo debe ser un texto";
-            } else if (typeof telefono !== "string") {
-                message = "Error en el tipo de dato ingresado, el telefono debe ser un texto";
-            }
-        } else {
-            DNI, nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono
-            if (!DNI || DNI.trim().length === 0) {
-                Mensaje = "Debe seleccionar algun paciente";
-            } else if (!nombres || nombres.trim().length === 0) {
-                Mensaje = "El campo nombres no puede quedar vacío";
-            } else if (!apellidos || apellidos.trim().length === 0) {
-                Mensaje = "El campo apellidos no puede quedar vacío";
-            } else if (!DNIF || DNIF.trim().length == 0) {
-                Mensaje = "El campo DNIF no puede quedar vacío";
-            } else if (!parentezco || parentezco.trim().length == 0) {
-                Mensaje = "El campo parentezco no puede quedar vacío";
-            } else if (!ocupacion || ocupacion.trim().length == 0) {
-                Mensaje = "El campo ocupacion no puede quedar vacío";
-            } else if (!correo || correo.trim().length == 0) {
-                Mensaje = "El campo correo no puede quedar vacío";
-            } else if (!telefono || telefono.trim().length == 0) {
-                Mensaje = "El campo telefono no puede quedar vacío";
-            }
-        }
+  async createFamiliar(DNI, nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono) {
+    // Validaciones
+    const mensajesErrores = [
+      this.validarString(DNI, "DNI"),
+      this.validarString(nombres, "nombres"),
+      this.validarString(apellidos, "apellidos"),
+      this.validarString(DNIF, "DNIF"),
+      this.validarString(parentezco, "parentezco"),
+      this.validarString(ocupacion, "ocupacion"),
+      this.validarString(correo, "correo"),
+      this.validarString(telefono, "telefono"),
+    ];
 
-        if (!message) {
-            return await objCapaDato.createFamiliar( DNI, nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono);
-        }
-        return { message: message, id: 0 };
+    // Filtra los mensajes de error que no son nulos
+    const erroresFiltrados = mensajesErrores.filter((mensaje) => mensaje !== null);
+
+    if (erroresFiltrados.length > 0) {
+      return { message: erroresFiltrados.join("\n"), id: 0 };
     }
 
+    // Validación adicional
+    if (!DNI || DNI.trim().length === 0) {
+      return { message: "Debe seleccionar algún paciente", id: 0 };
+    }
+
+    // Si todas las validaciones son exitosas, procede a la creación
+    return await objCapaDato.createFamiliar(DNI, nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono);
+  }
 }
 
 export default CN_familiar;
