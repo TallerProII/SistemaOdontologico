@@ -6,9 +6,9 @@ var objHistoriaClinica = new CN_HistoriaClinica();
 export const updateHistoriaClinica = async (req, res) => {
   try {
     const { id } = req.params;
-    const { idPaciente, fecha, descripcion, diagnostico, tratamiento } = req.body;
+    const { IDPaciente, Fecha, Hora, Ectoscopia } = req.body;
 
-    const result = await objHistoriaClinica.updateHistoriaClinica(id, idPaciente, fecha, descripcion, diagnostico, tratamiento);
+    const result = await objHistoriaClinica.updateHistoriaClinica(id, IDPaciente, Fecha, Hora, Ectoscopia);
 
     if (result.affectedRows === 0) return res.status(404).json({ message: result.message });
 
@@ -21,9 +21,9 @@ export const updateHistoriaClinica = async (req, res) => {
 // CREAR HISTORIA CLÍNICA
 export const createHistoriaClinica = async (req, res) => {
   try {
-    const { idPaciente, fecha, descripcion, diagnostico, tratamiento } = req.body;
+    const { IDPaciente, Fecha, Hora, Ectoscopia } = req.body;
 
-    const result = await objHistoriaClinica.createHistoriaClinica(idPaciente, fecha, descripcion, diagnostico, tratamiento);
+    const result = await objHistoriaClinica.createHistoriaClinica(IDPaciente, Fecha, Hora, Ectoscopia);
 
     if (result.affectedRows === 0) return res.status(404).json({ message: result.message });
 

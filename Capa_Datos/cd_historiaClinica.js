@@ -2,15 +2,15 @@ import { pool } from "./Conexion DB/conection-db.js";
 
 class CD_HistoriaClinica {
   // CREAR
-  async createHistoriaClinica(idPaciente, fecha, descripcion, diagnostico, tratamiento) {
+  async createHistoriaClinica(IDPaciente, Fecha, Hora, Ectoscopia) {
     var message = "";
     var result;
 
     try {
       // Implementa la consulta SQL para crear una nueva historia clínica en la base de datos
       [result] = await pool.query(
-        "CALL crear_historia_clinica(?, ?, ?, ?, ?)",
-        [idPaciente, fecha, descripcion, diagnostico, tratamiento]
+        "CALL crear_historia_clinica(?, ?, ?, ?)",
+        [IDPaciente, Fecha, Hora, Ectoscopia]
       );
     } catch (error) {
       message = "Algo salió mal en CD";
@@ -21,14 +21,14 @@ class CD_HistoriaClinica {
   }
 
   // ACTUALIZAR
-  async updateHistoriaClinica(id, idPaciente, fecha, descripcion, diagnostico, tratamiento) {
+  async updateHistoriaClinica(IDHistoriaClinica, IDPaciente, Fecha, Hora, Ectoscopia) {
     var message = "";
     var result;
 
     try {
       [result] = await pool.query(
-        "UPDATE tblHistoriaClinica SET idPaciente = ?, fecha = ?, descripcion = ?, diagnostico = ?, tratamiento = ? WHERE idHistoriaClinica = ?",
-        [idPaciente, fecha, descripcion, diagnostico, tratamiento, id]
+        "UPDATE tblHistoriaClinica SET IDPaciente = ?, Fecha = ?, Hora = ?, Ectoscopia = ? WHERE IDHistoriaClinica = ?",
+        [IDPaciente, Fecha, Hora, Ectoscopia, IDHistoriaClinica]
       );
     } catch (error) {
       message = "Algo salió mal en CD";
@@ -39,12 +39,12 @@ class CD_HistoriaClinica {
   }
 
   // ELIMINAR
-  async deleteHistoriaClinica(id) {
+  async deleteHistoriaClinica(IDHistoriaClinica) {
     var message = "";
     var result;
 
     try {
-      [result] = await pool.query("DELETE FROM tblHistoriaClinica WHERE idHistoriaClinica = ?", [id]);
+      [result] = await pool.query("DELETE FROM tblHistoriaClinica WHERE IDHistoriaClinica = ?", [IDHistoriaClinica]);
     } catch (error) {
       message = "Algo salió mal en CD";
       result.affectedRows = 0;
@@ -60,7 +60,7 @@ class CD_HistoriaClinica {
 
     try {
       // Código asincrónico, consulta SQL para listar historias clínicas
-      [rows] = await pool.query("SELECT * FROM tblHistoriasC");
+      [rows] = await pool.query("SELECT * FROM tblHistoriaClinica");
     } catch (error) {
       message = "Algo salió mal en CD";
       rows = [];
