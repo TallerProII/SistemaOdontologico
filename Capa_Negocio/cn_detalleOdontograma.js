@@ -1,40 +1,16 @@
 import CD_detalleOdontograma from "../Capa_Datos/cd_detalleOdontograma.js";
+import validaciones from "../Capa_Negocio/cn_validacion.js";
 
 var objCapaDato = new CD_detalleOdontograma();
 
 class CN_detalleOdontograma {
-
-  validarCampo = (campo, nombreCampo) => {
-    if (!campo || campo.trim().length === 0) {
-      return `El campo ${nombreCampo} no puede quedar vacío`;
-    }
-    return null;
-  };
-
-  validarNumero = (campo, nombreCampo) => {
-    const mensajeCampoVacio = this.validarCampo(campo, nombreCampo);
-    if (mensajeCampoVacio) {
-      return mensajeCampoVacio;
-    }
-
-    if (typeof campo !== "number") {
-      return `Error en el tipo de dato ingresado, el ${nombreCampo} debe ser un número`;
-    }
-    return null;
-  };
-
-  validarString = (campo, nombreCampo) => {
-    const mensajeCampoVacio = this.validarCampo(campo, nombreCampo);
-    if (mensajeCampoVacio) {
-      return mensajeCampoVacio;
-    }
-
-    if (typeof campo !== "string") {
-      return `Error en el tipo de dato ingresado, el ${nombreCampo} debe ser un texto`;
-    }
-    return null;
-  };
-
+  validarNumero = validaciones.validarNumero;
+  validarString = validaciones.validarString;
+  //LISTAR
+  async listDetodont(DNI) {
+    return await objCapaDato.listDetodont(DNI);
+  }
+  //CREAR
   async createDetodont(DNI, tratamiento, cuadrante, diente, sector, estado, notas) {
     // Validaciones
     const mensajesErrores = [

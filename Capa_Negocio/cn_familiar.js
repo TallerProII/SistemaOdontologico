@@ -1,28 +1,14 @@
 import CD_familiar from "../Capa_Datos/cd_familiar.js";
+import validaciones from "../Capa_Negocio/cn_validacion.js";
 
 var objCapaDato = new CD_familiar();
 
 class CN_familiar {
-
-  validarCampo = (campo, nombreCampo) => {
-    if (!campo || campo.trim().length === 0) {
-      return `El campo ${nombreCampo} no puede quedar vacío`;
-    }
-    return null;
-  };
-
-  validarString = (campo, nombreCampo) => {
-    const mensajeCampoVacio = this.validarCampo(campo, nombreCampo);
-    if (mensajeCampoVacio) {
-      return mensajeCampoVacio;
-    }
-
-    if (typeof campo !== "string") {
-      return `Error en el tipo de dato ingresado, el ${nombreCampo} debe ser un texto`;
-    }
-    return null;
-  };
-
+  validarString = validaciones.validarString;
+  //LISTAR
+  async listFamiliar(DNI) {
+    return await objCapaDato.listFamiliar(DNI);
+  }
   async createFamiliar(DNI, nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono) {
     // Validaciones
     const mensajesErrores = [
