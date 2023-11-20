@@ -4,42 +4,66 @@ const objCapaDato = new CD_HistoriaClinica();
 
 class CN_HistoriaClinica {
   // CREAR
-  async createHistoriaClinica(idPaciente, fecha, descripcion, diagnostico, tratamiento) {
+  async createHistoriaClinica(IDPaciente, Fecha, Hora, Ectoscopia) {
     let message = "";
 
-    if (typeof idPaciente !== "number" || typeof fecha !== "string" || typeof descripcion !== "string" || typeof diagnostico !== "string" || typeof tratamiento !== "string") {
-      message = "Error en el tipo de dato ingresado";
-    } else if (!idPaciente || !fecha || !descripcion || !diagnostico || !tratamiento) {
+    if (typeof IDPaciente !== "number") {
+      message = "Error en el tipo de dato de IDPaciente, debe ser un numero";
+    } else if (typeof Fecha !== "string") {
+      message = "Error en el tipo de dato de Fecha, debe ser texto";
+    } else if (typeof Hora !== "string") {
+      message = "Error en el tipo de dato de Hora, debe ser texto";
+    } else if (typeof Ectoscopia !== "string") {
+      message = "Error en el tipo de dato de Ectoscopia, debe ser texto";
+    } else if (!IDPaciente || !Fecha || !Hora || !Ectoscopia) {
       message = "Todos los campos son obligatorios";
     }
 
     if (!message) {
-      return await objCapaDato.createHistoriaClinica(idPaciente, fecha, descripcion, diagnostico, tratamiento);
+      return await objCapaDato.createHistoriaClinica(IDPaciente, Fecha, Hora, Ectoscopia);
     }
 
     return { message: message, id: 0 };
   }
 
   // ACTUALIZAR
-  async updateHistoriaClinica(id, idPaciente, fecha, descripcion, diagnostico, tratamiento) {
+  async updateHistoriaClinica(IDHistoriaClinica, IDPaciente, Fecha, Hora, Ectoscopia) {
     let message = "";
 
-    if (typeof idPaciente !== "number" || typeof fecha !== "string" || typeof descripcion !== "string" || typeof diagnostico !== "string" || typeof tratamiento !== "string") {
-      message = "Error en el tipo de dato ingresado";
-    } else if (!idPaciente || !fecha || !descripcion || !diagnostico || !tratamiento) {
+    if (typeof IDHistoriaClinica !== "number") {
+      message = "Error en el tipo de dato de IDHistoriaClinica, debe ser un numero";
+    } else if (typeof IDPaciente !== "number") {
+      message = "Error en el tipo de dato de IDPaciente, debe ser texto";
+    } else if (typeof Fecha !== "string") {
+      message = "Error en el tipo de dato de Fecha, debe ser texto";
+    } else if (typeof Hora !== "string") {
+      message = "Error en el tipo de dato de Hora, debe ser texto";
+    } else if (typeof Ectoscopia !== "string") {
+      message = "Error en el tipo de dato de Ectoscopia, debe ser texto";
+    } else if (!IDPaciente || !Fecha || !Hora || !Ectoscopia) {
       message = "Todos los campos son obligatorios";
     }
 
     if (!message) {
-      return await objCapaDato.updateHistoriaClinica(id, idPaciente, fecha, descripcion, diagnostico, tratamiento);
+      return await objCapaDato.updateHistoriaClinica(IDHistoriaClinica, IDPaciente, Fecha, Hora, Ectoscopia);
     }
 
     return { message: message, id: 0 };
   }
 
   // ELIMINAR
-  async deleteHistoriaClinica(id) {
-    return await objCapaDato.deleteHistoriaClinica(id);
+  async deleteHistoriaClinica(IDHistoriaClinica) {
+    let message = "";
+
+    if (typeof IDHistoriaClinica !== "number") {
+      message = "Error en el tipo de dato de IDHistoriaClinica";
+    }
+
+    if (!message) {
+      return await objCapaDato.deleteHistoriaClinica(IDHistoriaClinica);
+    }
+
+    return { message: message, id: 0 };
   }
 
   // LISTAR
