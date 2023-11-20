@@ -10,11 +10,11 @@ class CN_Cita {
     }
 
     // CREAR CITA
-    async createCita( IDHistoria, IDMedico, citMotivo, citEstado) {
+    async createCita(IDHistoria, IDMedico, citMotivo, citEstado) {
         // Validaciones
         var message = "";
 
-        if (typeof IDHistoria !== "number" || typeof IDMedico !== "number" || typeof citMotivo !== "string" 
+        if (typeof IDHistoria !== "number" || typeof IDMedico !== "number" || typeof citMotivo !== "string"
             || typeof citEstado !== "number") {
             if (typeof IDHistoria !== "number") {
                 message = "Error en el tipo de dato ingresado, el ID del paciente debe ser un número";
@@ -49,10 +49,12 @@ class CN_Cita {
         // Validaciones
         var message = "";
 
-        if (typeof medicoId !== "number" || typeof estado !== "number" ||
+        if (typeof idCita !== "number" || typeof medicoId !== "number" || typeof estado !== "number" ||
             typeof tratamiento !== "string" || typeof fecha !== "string" ||
             typeof hora !== "string") {
-            if (typeof medicoId !== "number") {
+            if (typeof idCita !== "number") {
+                message = "Error en el tipo de dato ingresado, el ID del paciente debe ser un número";
+            } else if (typeof medicoId !== "number") {
                 message = "Error en el tipo de dato ingresado, el ID del médico debe ser un número";
             } else if (typeof estado !== "number") {
                 message = "Error en el tipo de dato ingresado, el estado debe ser un número";
