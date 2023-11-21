@@ -1,5 +1,6 @@
 import express from "express";
 import morgan from "morgan";
+import cors from "cors";
 
 import employeesRoutes from "../Rutas/employees.routes.js";
 import citasRoutes from "../Rutas/citas.routes.js";
