@@ -9,7 +9,7 @@ class CD_Tratamientos {
         var rows;
         try {
             // codigo asincorno, consulta sql listar empleados
-            [rows] = await pool.query("SELECT * FROM tbltratamientos");
+            [[rows]] = await pool.query("CALL listar_tratamiento");
         } catch (error) {
             message = "Algo salió mal en CD, Servidor: " + error.message;
             rows = [];
@@ -24,12 +24,12 @@ class CD_Tratamientos {
         try {
             // codigo asincorno, consulta sql registrar empleados
             [result] = await pool.query(
-                "INSERT INTO tbltratamientos (Tratamiento, tartDesc) VALUES (?, ?)", [Tratamiento, tartDesc]);
+                "CALL crear_tratamiento(?, ?)", [Tratamiento, tartDesc]);
         } catch (error) {
             message = "Algo salió mal en CD, Servidor: " + error.message;
             result.affectedRows = 0;
         }
-        return { message: message, id: result.insertId };
+        return { message: message, affectedRows: result.affectedRows };
     }
 
     //ACTUALIZAR
@@ -39,8 +39,8 @@ class CD_Tratamientos {
 
         try {
             [result] = await pool.query(
-                "UPDATE tbltratamientos SET Tratamiento = IFNULL(?, Tratamiento), tartDesc = IFNULL(?, tartDesc) WHERE IDTratamiento = ?",
-                [Tratamiento, tartDesc, IDTratamiento]);
+                "CALL editar_tratamiento(?, ?,?)",
+                [IDTratamiento, Tratamiento, tartDesc]);
 
         } catch (error) {
             message = "Algo salió mal en CD, Servidor: " + error.message;
@@ -55,7 +55,7 @@ class CD_Tratamientos {
         var result = { affectedRows: 0 };
         try {
             // codigo asincorno, consulta sql registrar empleados
-            [result] = await pool.query("DELETE FROM tbltratamientos WHERE IDTratamiento = ?", [IDTratamiento]);
+            [result] = await pool.query("CALL eliminar_tratamiento(?, ?)", [IDTratamiento]);
         } catch (error) {
             message = "Algo salió mal en CD, Servidor: " + error.message;
             result.affectedRows = 0;

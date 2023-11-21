@@ -8,7 +8,7 @@ export const listTratamiento = async (req, res) => {
     const respuesta = await objTratamiento.listTratamiento();
     res.json(respuesta["rows"]);
   } catch (error) {
-    return res.status(500).json({ message: "Algo salió mal en CP - "+ error  });
+    return res.status(500).json({ message: "Algo salió mal en CP - " + error });
   }
 };
 
@@ -19,7 +19,7 @@ export const createTratamiento = async (req, res) => {
     const result = await objTratamiento.createTratamiento(Tratamiento, tartDesc);
     res.status(201).json({ result });
   } catch (error) {
-    return res.status(500).json({ message: "Algo salió mal en CP - "+ error  });
+    return res.status(500).json({ message: "Algo salió mal en CP - " + error });
   }
 };
 
@@ -30,13 +30,13 @@ export const updateTratamiento = async (req, res) => {
     const { Tratamiento, tartDesc } = req.body;
 
     const result = await objTratamiento.updateTratamiento(IDTratamiento, Tratamiento, tartDesc);
-    
+
     if (result.affectedRows === 0)
       return res.status(404).json({ message: result.message });
 
     res.json(result);
   } catch (error) {
-    return res.status(500).json({ message: "Algo salió mal en CP - "+ error  });
+    return res.status(500).json({ message: "Algo salió mal en CP - " + error });
   }
 };
 
@@ -51,7 +51,7 @@ export const deleteTratamiento = async (req, res) => {
     }
     res.status(204).json(result);
   } catch (error) {
-    return res.status(500).json({ message: "Algo salió mal en CP - "+ error  });
+    return res.status(500).json({ message: "Algo salió mal en CP - " + error });
   }
 };
 
