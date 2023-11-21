@@ -20,6 +20,7 @@ const corsOptions = {
 };
 
 // Middlewares
+app.use(cors(corsOptions));
 app.use(morgan("dev"));
 app.use(express.json());
 
