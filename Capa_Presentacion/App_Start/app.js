@@ -12,6 +12,13 @@ import tratamiento from "../Rutas/tratamiento.routes.js";
 
 const app = express();
 
+const corsOptions = {
+  origin: '*', // o '*' para permitir desde cualquier origen
+  methods: 'GET,PUT,PATCH,POST,DELETE',
+  allowedHeaders: 'Content-Type,Authorization',
+  
+};
+
 // Middlewares
 app.use(morgan("dev"));
 app.use(express.json());
