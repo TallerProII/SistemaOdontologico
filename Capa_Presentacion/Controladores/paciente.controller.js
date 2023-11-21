@@ -6,7 +6,7 @@ var objCapaNegocio = new CN_PACIENTE();
 export const listPaciente = async (req, res) => {
   try {
     const respuesta = await objCapaNegocio.listPaciente();
-    res.json(respuesta);
+    res.json(respuesta["rows"]);
   } catch (error) {
     return res.status(500).json({ message: "Algo salió mal en CP - "+error });
   }
