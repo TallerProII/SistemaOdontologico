@@ -8,7 +8,7 @@ export const listCita = async (req, res) => {
     const respuesta = await objCita.listCita();
     res.json(respuesta["rows"]);
   } catch (error) {
-    return res.status(500).json({ message: "Algo salió mal en CP - "+ error  });
+    return res.status(500).json({ message: "Algo salió mal en CP - ", error: error.message });
   }
 };
 // CREAR
@@ -18,7 +18,7 @@ export const createCita = async (req, res) => {
     const result = await objCita.createCita( IDHistoria, IDMedico, citMotivo, citFecha, citHora, citEstado);
     res.status(201).json({ result });
   } catch (error) {
-    return res.status(500).json({ message: "Algo salió mal en CP - "+ error  });
+    return res.status(500).json({ message: "Algo salió mal en CP - ", error: error.message });
   }
 };
 
@@ -35,7 +35,7 @@ export const updateCita = async (req, res) => {
 
     res.json(result);
   } catch (error) {
-    return res.status(500).json({ message: "Algo salió mal en CP - "+ error  });
+    return res.status(500).json({ message: "Algo salió mal en CP - ", error: error.message });
   }
 };
 
@@ -51,7 +51,7 @@ export const deleteCita = async (req, res) => {
     }
     res.status(204).json(result);
   } catch (error) {
-    return res.status(500).json({ message: "Algo salió mal en CP - "+ error  });
+    return res.status(500).json({ message: "Algo salió mal en CP - ", error: error.message });
   }
 };
 

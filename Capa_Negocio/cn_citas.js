@@ -8,8 +8,8 @@ class CN_Cita {
 
     // CREAR CITA
     async createCita(IDHistoria, IDMedico, citMotivo, citFecha, citHora, citEstado) {
-        // Validaciones
         var message = "";
+        var result = { affectedRows: 0 };
 
         if (typeof IDHistoria !== "number" || typeof IDMedico !== "number" || typeof citMotivo !== "string"
             || typeof citEstado !== "number") {
@@ -51,8 +51,9 @@ class CN_Cita {
 
     // ACTUALIZAR CITA
     async updateCita(IDCita, IDMedico, citMotivo, citFecha, citHora, citEstado) {
-        // Validaciones
         var message = "";
+        var result = { affectedRows: 0 };
+        
         if (typeof IDMedico !== "number" || typeof citMotivo !== "string" ||
             typeof citFecha !== "string" || typeof citHora !== "string" || typeof citEstado !== "string") {
 
@@ -98,11 +99,11 @@ class CN_Cita {
                 var dia = ("0" + fechaOriginal.getDate()).slice(-2);
                 var mes = ("0" + (fechaOriginal.getMonth() + 1)).slice(-2);
                 var anio = fechaOriginal.getFullYear();
-                fechaSinTiempo = anio + "-" + mes + "-" + dia;
+                fechaSinTiempo = dia + "-" + mes + "-" + anio;
             }
 
             resultado["rows"][i]["citFecha"] = fechaSinTiempo;
-            resultado["rows"][i]["citEstado"] = objUtilidades.citEstado(resultado["rows"][i]["citEstado"]);
+            // resultado["rows"][i]["citEstado"] = objUtilidades.citEstado(resultado["rows"][i]["citEstado"]);
         }
         return resultado;
     }
