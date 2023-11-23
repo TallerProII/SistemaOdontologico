@@ -31,6 +31,23 @@ class CD_familiar {
     
         return { message: message, affectedRows: result.affectedRows };
     }
+    // EDITAR
+    async updateFamiliar(id,  nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono) {
+        var message = "";
+        var result = { affectedRows: 0 }; // Inicializa result con un valor predeterminado
+    
+        try {
+        // Implementa la consulta SQL para crear un nuevo familiar en la base de datos
+        [result] = await pool.query(
+            "CALL editar_familiar (?, ?, ?, ?, ?, ?,?,?)",
+            [id,  nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono]
+        );
+        } catch (error) {
+        message = "Algo salió mal en CD - " + error;
+        }
+    
+        return { message: message, affectedRows: result.affectedRows };
+    }
   
 
 }

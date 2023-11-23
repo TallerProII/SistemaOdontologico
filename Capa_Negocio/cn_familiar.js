@@ -37,6 +37,28 @@ class CN_familiar {
     // Si todas las validaciones son exitosas, procede a la creación
     return await objCapaDato.createFamiliar(DNI, nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono);
   }
+  async updateFamiliar(id,  nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono) {
+    // Validaciones
+    const mensajesErrores = [
+      this.validarString(nombres, "nombres"),
+      this.validarString(apellidos, "apellidos"),
+      this.validarString(DNIF, "DNIF"),
+      this.validarString(parentezco, "parentezco"),
+      this.validarString(ocupacion, "ocupacion"),
+      this.validarString(correo, "correo"),
+      this.validarString(telefono, "telefono"),
+    ];
+
+    // Filtra los mensajes de error que no son nulos
+    const erroresFiltrados = mensajesErrores.filter((mensaje) => mensaje !== null);
+
+    if (erroresFiltrados.length > 0) {
+      return { message: erroresFiltrados.join("\n"), id: 0 };
+    }
+
+    // Si todas las validaciones son exitosas, procede a la creación
+    return await objCapaDato.updateFamiliar(id,  nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono);
+  }
 }
 
 export default CN_familiar;

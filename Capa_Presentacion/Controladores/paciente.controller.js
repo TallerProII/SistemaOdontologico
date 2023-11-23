@@ -25,8 +25,17 @@ export const createPaciente = async (req, res) => {
 //ACTUALIZAR PACIENTE
 export const updatePaciente = async (req, res) => {
   try {
+    const { id } = req.params;  //const id = req.params.id;
+    const {  NOMBRES, APELLIDOS, DNI, SEXO, RELIGION,RAZA,FECHA, LUGAR, RESIDENCIA, GRADO, OCUPACION, CIVIL, CORREO, TELEFONO, ESTADO, ECTOSCOPIA } = req.body;
+
+    const result = await objCapaNegocio.updatePaciente( id, NOMBRES, APELLIDOS, DNI, SEXO, RELIGION,RAZA,FECHA, LUGAR, RESIDENCIA, GRADO, OCUPACION, CIVIL, CORREO, TELEFONO, ESTADO, ECTOSCOPIA);
+
+    if (result.affectedRows === 0)
+      return res.status(404).json({ message: result.message });
+
+    res.json(result);
   } catch (error) {
-    return res.status(500).json({ message: "Algo salió mal en CP" });
+    return res.status(500).json({ message: "Algo salió mal en CP - "+error });
   }
 };
 

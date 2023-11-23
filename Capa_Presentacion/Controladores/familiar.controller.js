@@ -16,7 +16,7 @@ export const listFamiliar = async (req, res) => {
 export const createFamiliar = async (req, res) => {
   try {
     const {  DNI, nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono } = req.body;
-    const result = await objCapaNegocio.createFamiliar(  DNI, nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono );
+    const result = await objCapaNegocio.createFamiliar (  DNI, nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono );
     res.status(201).json({ result });
   } catch (error) {
     return res.status(500).json({ message: "Algo salió mal en CP - "+error+"" });
@@ -26,8 +26,17 @@ export const createFamiliar = async (req, res) => {
 //ACTUALIZAR FAMILIAR
 export const updateFamiliar = async (req, res) => {
   try {
+    const { id } = req.params;  //const id = req.params.id;
+    const {   nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono } = req.body;
+
+    const result = await objCapaNegocio.updateFamiliar (  id,  nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono );
+
+    if (result.affectedRows === 0)
+      return res.status(404).json({ message: result.message });
+
+    res.json(result);
   } catch (error) {
-    return res.status(500).json({ message: "Algo salió mal en CP" });
+    return res.status(500).json({ message: "Algo salió mal en CP - "+error });
   }
 };
 
