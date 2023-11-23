@@ -59,6 +59,11 @@ class CN_familiar {
     // Si todas las validaciones son exitosas, procede a la creación
     return await objCapaDato.updateFamiliar(id,  nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono);
   }
+  //ELIMINAR
+  async deleteFamiliar(id) {
+      //filtos - reglas de negocio
+      return await objCapaDato.deleteFamiliar(id);
+  }
 }
 
 export default CN_familiar;

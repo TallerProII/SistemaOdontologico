@@ -44,6 +44,13 @@ export const updateFamiliar = async (req, res) => {
 
 export const deleteFamiliar = async (req, res) => {
   try {
+    const { id } = req.params;
+    const result = await objCapaNegocio.deleteFamiliar(id);
+
+    if (result.affectedRows <= 0) {
+      return res.status(404).json({ message: result.message });
+    }
+    res.status(204).json(result);
   } catch (error) {
     return res.status(500).json({ message: "Algo salió mal en CP" });
   }

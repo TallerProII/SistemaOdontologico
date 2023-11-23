@@ -49,6 +49,18 @@ class CD_familiar {
         return { message: message, affectedRows: result.affectedRows };
     }
   
+    //ELIMINAR
+    async deleteFamiliar(id) {
+        var message = "";
+        var result;
+        try {
+            [result] = await pool.query("call eliminar_familiar (?);", [id]);
+        } catch (error) {
+            message = "Algo salió mal en CD - " +error ;
+            result.affectedRows = 0;
+        }
+        return { message: message, affectedRows: result.affectedRows};
+    }
 
 }
 
