@@ -4,7 +4,7 @@ class CD_HistoriaClinica {
   // CREAR
   async createHistoriaClinica(IDPaciente, Fecha, Hora, Ectoscopia) {
     var message = "";
-    var result;
+    var result = { affectedRows: 0 };
 
     try {
       // Implementa la consulta SQL para crear una nueva historia clínica en la base de datos
@@ -13,8 +13,8 @@ class CD_HistoriaClinica {
         [IDPaciente, Fecha, Hora, Ectoscopia]
       );
     } catch (error) {
-      message = "Algo salió mal en CD";
-      result.insertId = 0;
+      message = "Algo salió mal en CD, Servidor: " + error.message;
+      result.affectedRows = 0;
     }
 
     return { message: message, affectedRows: result.affectedRows };
@@ -23,7 +23,7 @@ class CD_HistoriaClinica {
   // ACTUALIZAR
   async updateHistoriaClinica(IDHistoriaClinica, IDPaciente, Fecha, Hora, Ectoscopia) {
     var message = "";
-    var result;
+    var result = { affectedRows: 0 };
 
     try {
       [result] = await pool.query(
@@ -31,7 +31,7 @@ class CD_HistoriaClinica {
         [IDPaciente, Fecha, Hora, Ectoscopia, IDHistoriaClinica]
       );
     } catch (error) {
-      message = "Algo salió mal en CD";
+      message = "Algo salió mal en CD, Servidor: " + error.message;
       result.affectedRows = 0;
     }
 
@@ -41,12 +41,12 @@ class CD_HistoriaClinica {
   // ELIMINAR
   async deleteHistoriaClinica(IDHistoriaClinica) {
     var message = "";
-    var result;
+    var result = { affectedRows: 0 };
 
     try {
       [result] = await pool.query("DELETE FROM tblHistoriaClinica WHERE IDHistoriaClinica = ?", [IDHistoriaClinica]);
     } catch (error) {
-      message = "Algo salió mal en CD";
+      message = "Algo salió mal en CD, Servidor: " + error.message;
       result.affectedRows = 0;
     }
 
@@ -62,7 +62,7 @@ class CD_HistoriaClinica {
       // Código asincrónico, consulta SQL para listar historias clínicas
       [rows] = await pool.query("SELECT * FROM tblHistoriaClinica");
     } catch (error) {
-      message = "Algo salió mal en CD";
+      message = "Algo salió mal en CD, Servidor: " + error.message;
       rows = [];
     }
 

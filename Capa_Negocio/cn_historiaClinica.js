@@ -6,9 +6,10 @@ class CN_HistoriaClinica {
   // CREAR
   async createHistoriaClinica(IDPaciente, Fecha, Hora, Ectoscopia) {
     let message = "";
+    let result = { affectedRows: 0 };
 
     if (typeof IDPaciente !== "number") {
-      message = "Error en el tipo de dato de IDPaciente, debe ser un numero";
+      message = "Error en el tipo de dato de IDPaciente, debe ser un número";
     } else if (typeof Fecha !== "string") {
       message = "Error en el tipo de dato de Fecha, debe ser texto";
     } else if (typeof Hora !== "string") {
@@ -20,20 +21,21 @@ class CN_HistoriaClinica {
     }
 
     if (!message) {
-      return await objCapaDato.createHistoriaClinica(IDPaciente, Fecha, Hora, Ectoscopia);
+      result = await objCapaDato.createHistoriaClinica(IDPaciente, Fecha, Hora, Ectoscopia);
     }
 
-    return { message: message, id: 0 };
+    return { message: message, affectedRows: result.affectedRows };
   }
 
   // ACTUALIZAR
   async updateHistoriaClinica(IDHistoriaClinica, IDPaciente, Fecha, Hora, Ectoscopia) {
     let message = "";
+    let result = { affectedRows: 0 };
 
     if (typeof IDHistoriaClinica !== "number") {
-      message = "Error en el tipo de dato de IDHistoriaClinica, debe ser un numero";
+      message = "Error en el tipo de dato de IDHistoriaClinica, debe ser un número";
     } else if (typeof IDPaciente !== "number") {
-      message = "Error en el tipo de dato de IDPaciente, debe ser texto";
+      message = "Error en el tipo de dato de IDPaciente, debe ser un número";
     } else if (typeof Fecha !== "string") {
       message = "Error en el tipo de dato de Fecha, debe ser texto";
     } else if (typeof Hora !== "string") {
@@ -45,25 +47,26 @@ class CN_HistoriaClinica {
     }
 
     if (!message) {
-      return await objCapaDato.updateHistoriaClinica(IDHistoriaClinica, IDPaciente, Fecha, Hora, Ectoscopia);
+      result = await objCapaDato.updateHistoriaClinica(IDHistoriaClinica, IDPaciente, Fecha, Hora, Ectoscopia);
     }
 
-    return { message: message, id: 0 };
+    return { message: message, affectedRows: result.affectedRows };
   }
 
-  // ELIMINAR
+  /// ELIMINAR
   async deleteHistoriaClinica(IDHistoriaClinica) {
     let message = "";
+    let result = { affectedRows: 0 };
 
     if (typeof IDHistoriaClinica !== "number") {
-      message = "Error en el tipo de dato de IDHistoriaClinica";
+      message = "Error en el tipo de dato de IDHistoriaClinica, debe ser un número";
     }
 
     if (!message) {
-      return await objCapaDato.deleteHistoriaClinica(IDHistoriaClinica);
+      result = await objCapaDato.deleteHistoriaClinica(IDHistoriaClinica);
     }
 
-    return { message: message, id: 0 };
+    return { message: message, affectedRows: result.affectedRows };
   }
 
   // LISTAR

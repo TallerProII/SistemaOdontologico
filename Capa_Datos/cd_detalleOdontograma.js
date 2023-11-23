@@ -17,7 +17,7 @@ class CD_detalleOdontograma {
     // CREAR
     async createDetodont( DNI, tratamiento, cuadrante, diente, sector, estado, notas) {
         var message = "";
-        var result;
+        var result = { affectedRows: 0 };
         try {
             // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(
