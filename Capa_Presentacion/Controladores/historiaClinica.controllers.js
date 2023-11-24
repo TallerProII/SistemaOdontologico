@@ -2,7 +2,7 @@ import CN_HistoriaClinica from "../../Capa_Negocio/cn_historiaClinica.js";
 
 var objHistoriaClinica = new CN_HistoriaClinica();
 
-// ACTUALIZAR HISTORIA CLÍNICA
+// ACTUALIZAR
 export const updateHistoriaClinica = async (req, res) => {
   try {
     const { id } = req.params;
@@ -18,7 +18,7 @@ export const updateHistoriaClinica = async (req, res) => {
   }
 };
 
-// CREAR HISTORIA CLÍNICA
+// CREAR
 export const createHistoriaClinica = async (req, res) => {
   try {
     const { idPaciente, fecha, descripcion, diagnostico, tratamiento } = req.body;
@@ -33,7 +33,7 @@ export const createHistoriaClinica = async (req, res) => {
   }
 };
 
-// ELIMINAR HISTORIA CLÍNICA
+// ELIMINAR
 export const deleteHistoriaClinica = async (req, res) => {
   try {
     const { id } = req.params;

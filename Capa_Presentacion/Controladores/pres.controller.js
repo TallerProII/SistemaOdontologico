@@ -2,7 +2,7 @@ import CN_ from "../../Capa_Negocio/cn_.js";
 
 var objCD_ = new CN_();
 
-//LISTAR E
+//LISTAR
 export const getDatosCita = async (req, res) => {
   try {
     const respuesta = await objCD_.getDatosCita();

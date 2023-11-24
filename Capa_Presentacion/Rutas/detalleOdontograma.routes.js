@@ -9,13 +9,13 @@ import {
 const router = Router();
 
 
-// Crear detalle odontograma
+// Crear
 router.post("/createDetodont", createDetodont);
-//Actualizar detalle odontograma
+//Actualizar
 router.patch("/updateDetodont/:id", updateDetodont);
-//Listar detalle odontograma
+//Listar
 router.get("/listDetodont/:DNI", listDetodont);
-// DELETE detalle odontograma
+// DELETE
 router.delete("/deleteDetodont/:id", deleteDetodont);
 
 

@@ -1,8 +1,8 @@
-import CN_familiar from "../../Capa_Negocio/cn_familiar.js";
+import CNFamiliar from "../../Capa_Negocio/cn_Familiar.js";
 
-var objCapaNegocio = new CN_familiar();
+var objCapaNegocio = new CNFamiliar();
 
-//Listar FAMILIAR
+//Listar
 export const listFamiliar = async (req, res) => {
   try {
     const { DNI }= req.params;
@@ -12,7 +12,7 @@ export const listFamiliar = async (req, res) => {
     return res.status(500).json({ message: "Algo salió mal en CP - "+error });
   }
 };
-// CREAR FAMILIAR
+// CREAR
 export const createFamiliar = async (req, res) => {
   try {
     const {  DNI, nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono } = req.body;
@@ -23,7 +23,7 @@ export const createFamiliar = async (req, res) => {
   }
 };
 
-//ACTUALIZAR FAMILIAR
+//ACTUALIZAR
 export const updateFamiliar = async (req, res) => {
   try {
     const { id } = req.params;  //const id = req.params.id;
@@ -40,7 +40,7 @@ export const updateFamiliar = async (req, res) => {
   }
 };
 
-//ELIMINAR FAMILIAR
+//ELIMINAR
 
 export const deleteFamiliar = async (req, res) => {
   try {
