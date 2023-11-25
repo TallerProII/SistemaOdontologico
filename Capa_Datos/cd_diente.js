@@ -17,7 +17,7 @@ class CD_diente {
     // CREAR
     async creatediente( DNI, NUMERO, COLOR, FORMA, TAMANO, DIASTEMA, EDENTULA, POSANORMAL, FACDESGASTE, LINMEDIA, OTROS) {
         var message = "";
-        var result;
+        var result = { affectedRows: 0 };
         try {
             // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(
@@ -33,7 +33,7 @@ class CD_diente {
     // EDITAR
     async updatediente(CODIGO, NUMERO, COLOR, FORMA, TAMANO, DIASTEMA, EDENTULA, POSANORMAL, FACDESGASTE, LINMEDIA, OTROS) {
         var message = "";
-        var result;
+        var result = { affectedRows: 0 };
         try {
             // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(

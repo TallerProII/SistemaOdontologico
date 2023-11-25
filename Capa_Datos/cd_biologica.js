@@ -17,7 +17,7 @@ class CD_biologica {
     // CREAR
     async createbiologica( DNI, APETITO, DEPOSICION, SED, ORINA, SUENO) {
         var message = "";
-        var result;
+        var result = { affectedRows: 0 };
         try {
             // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(
@@ -33,7 +33,7 @@ class CD_biologica {
     // EDITAR
     async updatebiologica(CODIGO, APETITO, DEPOSICION, SED, ORINA, SUENO) {
         var message = "";
-        var result;
+        var result = { affectedRows: 0 };
         try {
             // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(

@@ -17,7 +17,7 @@ class CD_exauxiliares {
     // CREAR
     async createexauxiliares( DNI, TIPO, DESC) {
         var message = "";
-        var result;
+        var result = { affectedRows: 0 };
         try {
             // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(
@@ -33,7 +33,7 @@ class CD_exauxiliares {
     // EDITAR
     async updateexauxiliares(CODIGO, TIPO, DESC) {
         var message = "";
-        var result;
+        var result = { affectedRows: 0 };
         try {
             // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(

@@ -17,7 +17,7 @@ class CD_exextrabucal {
     // CREAR
     async createexextrabucal( DNI, FACIE, CRANEO, CARA, TERCIO, BILATERAL, PERFIL, TRAYECTORIA, RUIDOS, PALPACION, GANGLIOS, APERTURA) {
         var message = "";
-        var result;
+        var result = { affectedRows: 0 };
         try {
             // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(
@@ -33,7 +33,7 @@ class CD_exextrabucal {
     // EDITAR
     async updateexextrabucal(CODIGO, FACIE, CRANEO, CARA, TERCIO, BILATERAL, PERFIL, TRAYECTORIA, RUIDOS, PALPACION, GANGLIOS, APERTURA) {
         var message = "";
-        var result;
+        var result = { affectedRows: 0 };
         try {
             // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(

@@ -17,7 +17,7 @@ class CD_exintrabucal {
     // CREAR
     async createexintrabucal( DNI, LABIOS, PALADAR, CARRILLO, PISO, LENGUA, OROFARINGE, FRENILLO, SALIVA) {
         var message = "";
-        var result;
+        var result = { affectedRows: 0 };
         try {
             // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(
@@ -33,7 +33,7 @@ class CD_exintrabucal {
     // EDITAR
     async updateexintrabucal(CODIGO, LABIOS, PALADAR, CARRILLO, PISO, LENGUA, OROFARINGE, FRENILLO, SALIVA) {
         var message = "";
-        var result;
+        var result = { affectedRows: 0 };
         try {
             // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(

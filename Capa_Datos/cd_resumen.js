@@ -17,7 +17,7 @@ class CD_resumen {
     // CREAR
     async createresumen( DNI, TITULO, DETALLE) {
         var message = "";
-        var result;
+        var result = { affectedRows: 0 };
         try {
             // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(
@@ -33,7 +33,7 @@ class CD_resumen {
     // EDITAR
     async updateresumen(CODIGO, TITULO, DETALLE) {
         var message = "";
-        var result;
+        var result = { affectedRows: 0 };
         try {
             // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(

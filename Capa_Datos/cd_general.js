@@ -17,7 +17,7 @@ class CD_general {
     // CREAR
     async creategeneral( DNI, TIPO, ESTADO, PIEZAS, DESC) {
         var message = "";
-        var result;
+        var result = { affectedRows: 0 };
         try {
             // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(
@@ -33,7 +33,7 @@ class CD_general {
     // EDITAR
     async updategeneral(CODIGO, TIPO, ESTADO, PIEZAS, DESC) {
         var message = "";
-        var result;
+        var result = { affectedRows: 0 };
         try {
             // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(

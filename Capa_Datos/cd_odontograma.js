@@ -1,13 +1,13 @@
 import { pool } from "./Conexion DB/conection-db.js";
-class CD_oclusion {
+class CD_odontograma {
 
     //LISTAR
-    async listoclusion(DNI) {
+    async listodontograma(DNI) {
         var message = "";
         var rows;
         try {
             // codigo asincorno, consulta sql listar empleados
-            [[rows]] = await pool.query("call listar_oclusion (?);",[DNI]);
+            [[rows]] = await pool.query("call listar_odontograma (?);",[DNI]);
         } catch (error) {
             message = "Algo salió mal en CD - " +error ;
             rows = [];
@@ -15,14 +15,14 @@ class CD_oclusion {
         return { message: message, rows: rows };
     }
     // CREAR
-    async createoclusion( DNI, MOLARDER, MOLARIZQ, CANINADER, CANINAIZQ, OVERBITE, OVERJET, RELCENTRICA, GCANDER, GCANIZQ, GANT, SAGITAL, VERTICAL, HORIZONTAL, POSTURAL, OCLUSIAL, ESPACLIBRE) {
+    async createodontograma( DNI, FASE, ESPECIF, OBSERV) {
         var message = "";
         var result = { affectedRows: 0 };
         try {
             // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(
-                "CALL crear_oclusion (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
-                [DNI, MOLARDER, MOLARIZQ, CANINADER, CANINAIZQ, OVERBITE, OVERJET, RELCENTRICA, GCANDER, GCANIZQ, GANT, SAGITAL, VERTICAL, HORIZONTAL, POSTURAL, OCLUSIAL, ESPACLIBRE]
+                "CALL crear_odontograma (?,?,?,?)",
+                [DNI, FASE, ESPECIF, OBSERV]
             );
         } catch (error) {
             message = "Algo salió mal en CD - " +error ;
@@ -31,14 +31,14 @@ class CD_oclusion {
         return { message: message, affectedRows: result.affectedRows };
     }
     // EDITAR
-    async updateoclusion(CODIGO, MOLARDER, MOLARIZQ, CANINADER, CANINAIZQ, OVERBITE, OVERJET, RELCENTRICA, GCANDER, GCANIZQ, GANT, SAGITAL, VERTICAL, HORIZONTAL, POSTURAL, OCLUSIAL, ESPACLIBRE) {
+    async updateodontograma(CODIGO, FASE, ESPECIF, OBSERV) {
         var message = "";
         var result = { affectedRows: 0 };
         try {
             // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(
-                "CALL editar_oclusion (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
-                [CODIGO, MOLARDER, MOLARIZQ, CANINADER, CANINAIZQ, OVERBITE, OVERJET, RELCENTRICA, GCANDER, GCANIZQ, GANT, SAGITAL, VERTICAL, HORIZONTAL, POSTURAL, OCLUSIAL, ESPACLIBRE]
+                "CALL editar_odontograma (?,?,?,?)",
+                [CODIGO, FASE, ESPECIF, OBSERV]
             );
         } catch (error) {
             message = "Algo salió mal en CD - " +error ;
@@ -47,11 +47,11 @@ class CD_oclusion {
         return { message: message, affectedRows: result.affectedRows };
     }
     //ELIMINAR
-    async deleteoclusion(id) {
+    async deleteodontograma(id) {
         var message = "";
         var result;
         try {
-            [result] = await pool.query("call eliminar_oclusion  (?);", [id]);
+            [result] = await pool.query("call eliminar_odontograma  (?);", [id]);
         } catch (error) {
             message = "Algo salió mal en CD - " +error ;
             result.affectedRows = 0;
@@ -61,5 +61,5 @@ class CD_oclusion {
 
 }
 
-export default CD_oclusion;
+export default CD_odontograma;
 

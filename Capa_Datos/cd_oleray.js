@@ -17,7 +17,7 @@ class CD_oleray {
     // CREAR
     async createoleray( DNI, PORCENTAJE, IHO, ESTADO) {
         var message = "";
-        var result;
+        var result = { affectedRows: 0 };
         try {
             // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(
@@ -33,7 +33,7 @@ class CD_oleray {
     // EDITAR
     async updateoleray(CODIGO, PORCENTAJE, IHO, ESTADO) {
         var message = "";
-        var result;
+        var result = { affectedRows: 0 };
         try {
             // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(
