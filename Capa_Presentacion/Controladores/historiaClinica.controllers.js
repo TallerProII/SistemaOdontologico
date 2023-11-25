@@ -12,7 +12,7 @@ export const listHistoriaClinica = async (req, res) => {
   }
 };
 
-// CREAR HISTORIA CLÍNICA
+// CREAR
 export const createHistoriaClinica = async (req, res) => {
   try {
     const { IDPaciente, Fecha, Hora, Ectoscopia } = req.body;
@@ -39,7 +39,7 @@ export const updateHistoriaClinica = async (req, res) => {
   }
 };
 
-// ELIMINAR HISTORIA CLÍNICA
+// ELIMINAR
 export const deleteHistoriaClinica = async (req, res) => {
   try {
     const { id } = req.params;

@@ -12,7 +12,7 @@ const router = Router();
 // Crear paciente
 router.post("/createPaciente", createPaciente);
 //Actualizar paciente
-router.patch("/updatePAciente/:id", updatePaciente);
+router.patch("/updatePaciente/:id", updatePaciente);
 //Listar paciente
 router.get("/listPaciente/", listPaciente);
 // DELETE paciente

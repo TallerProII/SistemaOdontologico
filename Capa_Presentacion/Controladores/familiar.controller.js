@@ -1,8 +1,8 @@
-import CN_familiar from "../../Capa_Negocio/cn_familiar.js";
+import CNFamiliar from "../../Capa_Negocio/cn_Familiar.js";
 
-var objCapaNegocio = new CN_familiar();
+var objCapaNegocio = new CNFamiliar();
 
-//Listar FAMILIAR
+//Listar
 export const listFamiliar = async (req, res) => {
   try {
     const { DNI }= req.params;
@@ -12,29 +12,45 @@ export const listFamiliar = async (req, res) => {
     return res.status(500).json({ message: "Algo salió mal en CP - "+error });
   }
 };
-// CREAR FAMILIAR
+// CREAR
 export const createFamiliar = async (req, res) => {
   try {
     const {  DNI, nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono } = req.body;
-    const result = await objCapaNegocio.createFamiliar(  DNI, nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono );
+    const result = await objCapaNegocio.createFamiliar (  DNI, nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono );
     res.status(201).json({ result });
   } catch (error) {
     return res.status(500).json({ message: "Algo salió mal en CP - "+error+"" });
   }
 };
 
-//ACTUALIZAR FAMILIAR
+//ACTUALIZAR
 export const updateFamiliar = async (req, res) => {
   try {
+    const { id } = req.params;  //const id = req.params.id;
+    const {   nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono } = req.body;
+
+    const result = await objCapaNegocio.updateFamiliar (  id,  nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono );
+
+    if (result.affectedRows === 0)
+      return res.status(404).json({ message: result.message });
+
+    res.json(result);
   } catch (error) {
-    return res.status(500).json({ message: "Algo salió mal en CP" });
+    return res.status(500).json({ message: "Algo salió mal en CP - "+error });
   }
 };
 
-//ELIMINAR FAMILIAR
+//ELIMINAR
 
 export const deleteFamiliar = async (req, res) => {
   try {
+    const { id } = req.params;
+    const result = await objCapaNegocio.deleteFamiliar(id);
+
+    if (result.affectedRows <= 0) {
+      return res.status(404).json({ message: result.message });
+    }
+    res.status(204).json(result);
   } catch (error) {
     return res.status(500).json({ message: "Algo salió mal en CP" });
   }

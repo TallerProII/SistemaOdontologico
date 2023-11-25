@@ -1,13 +1,13 @@
 import { pool } from "./Conexion DB/conection-db.js";
-class CD_detalleOdontograma {
+class CD_dolor {
 
     //LISTAR
-    async listDetodont(DNI) {
+    async listdolor(DNI) {
         var message = "";
         var rows;
         try {
             // codigo asincorno, consulta sql listar empleados
-            [[rows]] = await pool.query("call listar_detalle_odontograma (?);",[DNI]);
+            [[rows]] = await pool.query("call listar_dolor (?);",[DNI]);
         } catch (error) {
             message = "Algo salió mal en CD - " +error ;
             rows = [];
@@ -15,14 +15,14 @@ class CD_detalleOdontograma {
         return { message: message, rows: rows };
     }
     // CREAR
-    async createDetodont( DNI, tratamiento, cuadrante, diente, sector, estado, notas) {
+    async createdolor( DNI, MUSCULO, TEMPORAL, MASETERO, PTEINTERNO, PTEEXTERNO, DIGASTRICO, ESTERNOC) {
         var message = "";
-        var result = { affectedRows: 0 };
+        var result;
         try {
             // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(
-                "CALL crear_detalle_odontograma(?, ?, ?, ?, ?, ?,?)",
-                [DNI, tratamiento, cuadrante, diente, sector, estado, notas]
+                "CALL crear_dolor (?,?,?,?,?,?,?,?);",
+                [DNI, MUSCULO, TEMPORAL, MASETERO, PTEINTERNO, PTEEXTERNO, DIGASTRICO, ESTERNOC]
             );
         } catch (error) {
             message = "Algo salió mal en CD - " +error ;
@@ -31,14 +31,14 @@ class CD_detalleOdontograma {
         return { message: message, affectedRows: result.affectedRows };
     }
     // EDITAR
-    async updateDetodont( id, tratamiento, cuadrante, diente, sector, estado, notas) {
+    async updatedolor(CODIGO, MUSCULO, TEMPORAL, MASETERO, PTEINTERNO, PTEEXTERNO, DIGASTRICO, ESTERNOC) {
         var message = "";
         var result;
         try {
             // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(
-                "CALL editar_detalle_odontograma(?, ?, ?, ?, ?, ?,?)",
-                [id, tratamiento, cuadrante, diente, sector, estado, notas]
+                "CALL editar_dolor (?,?,?,?,?,?,?,?);",
+                [CODIGO, MUSCULO, TEMPORAL, MASETERO, PTEINTERNO, PTEEXTERNO, DIGASTRICO, ESTERNOC]
             );
         } catch (error) {
             message = "Algo salió mal en CD - " +error ;
@@ -47,11 +47,11 @@ class CD_detalleOdontograma {
         return { message: message, affectedRows: result.affectedRows };
     }
     //ELIMINAR
-    async deleteDetodont(id) {
+    async deletedolor(id) {
         var message = "";
         var result;
         try {
-            [result] = await pool.query("call eliminar_detalle_odontograma (?);", [id]);
+            [result] = await pool.query("call eliminar_dolor  (?);", [id]);
         } catch (error) {
             message = "Algo salió mal en CD - " +error ;
             result.affectedRows = 0;
@@ -61,5 +61,5 @@ class CD_detalleOdontograma {
 
 }
 
-export default CD_detalleOdontograma;
+export default CD_dolor;
 
