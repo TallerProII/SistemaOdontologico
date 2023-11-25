@@ -1,22 +1,36 @@
 import CD_HistoriaClinica from "../Capa_Datos/cd_historiaClinica.js";
+import Validaciones from "./cn_validacion.js";
 
 const objCapaDato = new CD_HistoriaClinica();
 
 class CN_HistoriaClinica {
+  constructor() {
+    this.objCapaDato = new CD_HistoriaClinica();
+  }
+
+  validarNumero = Validaciones.validarNumero;
+  validarString = Validaciones.validarString;
+
   // CREAR
   async createHistoriaClinica(IDPaciente, Fecha, Hora, Ectoscopia) {
+    const errores = [
+      this.validarNumero(IDPaciente, "ID del paciente"),
+      this.validarString(Fecha, "Fecha"),
+      this.validarString(Hora, "Hora"),
+      this.validarString(Ectoscopia, "Ectoscopia"),
+    ];
+
+    const erroresFiltrados = errores.filter((error) => error !== null);
+
+    if (erroresFiltrados.length > 0) {
+      return { message: erroresFiltrados.join("\n"), affectedRows: 0 };
+    }
+
+    // Resto del código...
     let message = "";
     let result = { affectedRows: 0 };
 
-    if (typeof IDPaciente !== "number") {
-      message = "Error en el tipo de dato de IDPaciente, debe ser un número";
-    } else if (typeof Fecha !== "string") {
-      message = "Error en el tipo de dato de Fecha, debe ser texto";
-    } else if (typeof Hora !== "string") {
-      message = "Error en el tipo de dato de Hora, debe ser texto";
-    } else if (typeof Ectoscopia !== "string") {
-      message = "Error en el tipo de dato de Ectoscopia, debe ser texto";
-    } else if (!IDPaciente || !Fecha || !Hora || !Ectoscopia) {
+    if (!IDPaciente || !Fecha || !Hora || !Ectoscopia) {
       message = "Todos los campos son obligatorios";
     }
 
@@ -29,20 +43,25 @@ class CN_HistoriaClinica {
 
   // ACTUALIZAR
   async updateHistoriaClinica(IDHistoriaClinica, IDPaciente, Fecha, Hora, Ectoscopia) {
+    const errores = [
+      this.validarNumero(IDHistoriaClinica, "ID de la historia clínica"),
+      this.validarNumero(IDPaciente, "ID del paciente"),
+      this.validarString(Fecha, "Fecha"),
+      this.validarString(Hora, "Hora"),
+      this.validarString(Ectoscopia, "Ectoscopia"),
+    ];
+
+    const erroresFiltrados = errores.filter((error) => error !== null);
+
+    if (erroresFiltrados.length > 0) {
+      return { message: erroresFiltrados.join("\n"), affectedRows: 0 };
+    }
+
+    // Resto del código...
     let message = "";
     let result = { affectedRows: 0 };
 
-    if (typeof IDHistoriaClinica !== "number") {
-      message = "Error en el tipo de dato de IDHistoriaClinica, debe ser un número";
-    } else if (typeof IDPaciente !== "number") {
-      message = "Error en el tipo de dato de IDPaciente, debe ser un número";
-    } else if (typeof Fecha !== "string") {
-      message = "Error en el tipo de dato de Fecha, debe ser texto";
-    } else if (typeof Hora !== "string") {
-      message = "Error en el tipo de dato de Hora, debe ser texto";
-    } else if (typeof Ectoscopia !== "string") {
-      message = "Error en el tipo de dato de Ectoscopia, debe ser texto";
-    } else if (!IDPaciente || !Fecha || !Hora || !Ectoscopia) {
+    if (!IDPaciente || !Fecha || !Hora || !Ectoscopia) {
       message = "Todos los campos son obligatorios";
     }
 
@@ -55,12 +74,19 @@ class CN_HistoriaClinica {
 
   /// ELIMINAR
   async deleteHistoriaClinica(IDHistoriaClinica) {
+    const errores = [
+      this.validarNumero(IDHistoriaClinica, "ID de la historia clínica"),
+    ];
+
+    const erroresFiltrados = errores.filter((error) => error !== null);
+
+    if (erroresFiltrados.length > 0) {
+      return { message: erroresFiltrados.join("\n"), affectedRows: 0 };
+    }
+
+    // Resto del código...
     let message = "";
     let result = { affectedRows: 0 };
-
-    if (typeof IDHistoriaClinica !== "number") {
-      message = "Error en el tipo de dato de IDHistoriaClinica, debe ser un número";
-    }
 
     if (!message) {
       result = await objCapaDato.deleteHistoriaClinica(IDHistoriaClinica);
