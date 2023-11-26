@@ -24,6 +24,8 @@ import resumen from "../Rutas/resumen.routes.js";
 import exgeneral from "../Rutas/exgeneral.routes.js";
 import medico from "../Rutas/medico.routes.js";
 import odontograma from "../Rutas/odontograma.routes.js";
+import enfermedad from "../Rutas/enfermedad.routes.js";
+import detenfermedad from "../Rutas/detenfermedad.routes.js";
 
 const app = express();
 
@@ -62,6 +64,8 @@ app.use("/resumen", resumen );
 app.use("/exgeneral", exgeneral );
 app.use("/medico", medico );
 app.use("/odontograma", odontograma );
+app.use("/enfermedad", enfermedad );
+app.use("/detenfermedad", detenfermedad );
 
 app.use((req, res, next) => {
   res.status(404).json({ message: "ERROR 404: Not found" });
