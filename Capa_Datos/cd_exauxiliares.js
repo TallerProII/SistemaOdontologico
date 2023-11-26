@@ -1,12 +1,10 @@
 import { pool } from "./Conexion DB/conection-db.js";
 class CD_exauxiliares {
-
     //LISTAR
     async listexauxiliares(DNI) {
         var message = "";
         var rows;
         try {
-            // codigo asincorno, consulta sql listar empleados
             [[rows]] = await pool.query("call listar_exauxiliares (?);",[DNI]);
         } catch (error) {
             message = "Algo salió mal en CD - " +error ;
@@ -19,23 +17,22 @@ class CD_exauxiliares {
         var message = "";
         var result = { affectedRows: 0 };
         try {
-            // Implementa la consulta SQL para crear una nueva cita en la base de datos
-            [result] = await pool.query(
+            [[[result]]] = await pool.query(
                 "CALL crear_exauxiliares (?,?,?)",
                 [DNI, TIPO, DESC]
             );
+            result = { affectedRows: 1, row: result }
         } catch (error) {
-            message = "Algo salió mal en CD - " +error ;
-            result.insertId = 0;
+            message = "Algo salió mal en CD, Servidor: "+ error.message;
+            result.affectedRows = 0;
         }
-        return { message: message, affectedRows: result.affectedRows };
+        return { message: message, affectedRows: result.affectedRows, row: result.row };
     }
     // EDITAR
     async updateexauxiliares(CODIGO, TIPO, DESC) {
         var message = "";
         var result = { affectedRows: 0 };
         try {
-            // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(
                 "CALL editar_exauxiliares (?,?,?)",
                 [CODIGO, TIPO, DESC]

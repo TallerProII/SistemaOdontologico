@@ -12,7 +12,6 @@ class CN_exgeneral {
   }
   //CREAR
   async createexgeneral(DNI, PESO, TALLA, BIOTIPO, PIEL, CABELLO, UNAS, PRESION, PULSO, FRECUENCIA, TEMPERATURA) {
-    // Validaciones
     const mensajesErrores = [
       this.validarString(String(DNI), "DNI"),
       this.validarNumero(PESO, "PESO"),
@@ -26,25 +25,17 @@ class CN_exgeneral {
       this.validarString(FRECUENCIA, "FRECUENCIA"),
       this.validarString(TEMPERATURA, "TEMPERATURA"),
     ];
-
-    // Filtra los mensajes de error que no son nulos
     const erroresFiltrados = mensajesErrores.filter((mensaje) => mensaje !== null);
-
     if (erroresFiltrados.length > 0) {
       return { message: erroresFiltrados.join("\n"), id: 0 };
     }
-
-    // Validación adicional
     if (!DNI || (String(DNI.trim().length) === 8 && !isNaN(DNI.trim()))) {
       return { message: "Debe seleccionar algún paciente", id: 0 };
     }
-
-    // Si todas las validaciones son exitosas, procede a la creación
     return await objCapaDato.createexgeneral(DNI, PESO, TALLA, BIOTIPO, PIEL, CABELLO, UNAS, PRESION, PULSO, FRECUENCIA, TEMPERATURA);
   }
   //CREAR
   async updateexgeneral(CODIGO, PESO, TALLA, BIOTIPO, PIEL, CABELLO, UNAS, PRESION, PULSO, FRECUENCIA, TEMPERATURA) {
-    // Validaciones
     const mensajesErrores = [
         this.validarNumero(PESO, "PESO"),
         this.validarNumero(TALLA, "TALLA"),
@@ -57,23 +48,15 @@ class CN_exgeneral {
         this.validarString(FRECUENCIA, "FRECUENCIA"),
         this.validarString(TEMPERATURA, "TEMPERATURA"),
     ];
-
-    // Filtra los mensajes de error que no son nulos
     const erroresFiltrados = mensajesErrores.filter((mensaje) => mensaje !== null);
-
     if (erroresFiltrados.length > 0) {
       return { message: erroresFiltrados.join("\n"), id: 0 };
     }
-
-    // Si todas las validaciones son exitosas, procede a la creación
     return await objCapaDato.updateexgeneral( CODIGO, PESO, TALLA, BIOTIPO, PIEL, CABELLO, UNAS, PRESION, PULSO, FRECUENCIA, TEMPERATURA);
   }
   //ELIMINAR
   async deleteexgeneral(id) {
-      //filtos - reglas de negocio
-
       return await objCapaDato.deleteexgeneral(id);
   }
 }
-
 export default CN_exgeneral;

@@ -6,7 +6,6 @@ class CD_dolor {
         var message = "";
         var rows;
         try {
-            // codigo asincorno, consulta sql listar empleados
             [[rows]] = await pool.query("call listar_dolor (?);",[DNI]);
         } catch (error) {
             message = "Algo salió mal en CD - " +error ;
@@ -19,23 +18,22 @@ class CD_dolor {
         var message = "";
         var result = { affectedRows: 0 };
         try {
-            // Implementa la consulta SQL para crear una nueva cita en la base de datos
-            [result] = await pool.query(
+            [[[result]]] = await pool.query(
                 "CALL crear_dolor (?,?,?,?,?,?,?,?);",
                 [DNI, MUSCULO, TEMPORAL, MASETERO, PTEINTERNO, PTEEXTERNO, DIGASTRICO, ESTERNOC]
             );
+            result = { affectedRows: 1, row: result }
         } catch (error) {
-            message = "Algo salió mal en CD - " +error ;
-            result.insertId = 0;
+            message = "Algo salió mal en CD, Servidor: "+ error.message;
+            result.affectedRows = 0;
         }
-        return { message: message, affectedRows: result.affectedRows };
+        return { message: message, affectedRows: result.affectedRows, row: result.row };
     }
     // EDITAR
     async updatedolor(CODIGO, MUSCULO, TEMPORAL, MASETERO, PTEINTERNO, PTEEXTERNO, DIGASTRICO, ESTERNOC) {
         var message = "";
         var result = { affectedRows: 0 };
         try {
-            // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(
                 "CALL editar_dolor (?,?,?,?,?,?,?,?);",
                 [CODIGO, MUSCULO, TEMPORAL, MASETERO, PTEINTERNO, PTEEXTERNO, DIGASTRICO, ESTERNOC]

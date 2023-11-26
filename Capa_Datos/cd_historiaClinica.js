@@ -7,19 +7,17 @@ class CD_HistoriaClinica {
     var result = { affectedRows: 0 };
 
     try {
-      // Implementa la consulta SQL para crear una nueva historia clínica en la base de datos
-      [result] = await pool.query(
+      [[[result]]] = await pool.query(
         "CALL crear_historia_clinica(?, ?, ?, ?)",
         [IDPaciente, Fecha, Hora, Ectoscopia]
       );
+      result = { affectedRows: 1, row: result }
     } catch (error) {
-      message = "Algo salió mal en CD, Servidor: " + error.message;
-      result.affectedRows = 0;
+        message = "Algo salió mal en CD, Servidor: "+ error.message;
+        result.affectedRows = 0;
     }
-
-    return { message: message, affectedRows: result.affectedRows };
+    return { message: message, affectedRows: result.affectedRows, row: result.row };
   }
-
   // ACTUALIZAR
   async updateHistoriaClinica(IDHistoriaClinica, IDPaciente, Fecha, Hora, Ectoscopia) {
     var message = "";
@@ -37,7 +35,6 @@ class CD_HistoriaClinica {
 
     return { message: message, affectedRows: result.affectedRows };
   }
-
   // ELIMINAR
   async deleteHistoriaClinica(IDHistoriaClinica) {
     var message = "";
@@ -52,7 +49,6 @@ class CD_HistoriaClinica {
 
     return { message: message, affectedRows: result.affectedRows };
   }
-
   // LISTAR
   async listHistoriaClinica() {
     var message = "";
@@ -65,7 +61,6 @@ class CD_HistoriaClinica {
       message = "Algo salió mal en CD, Servidor: " + error.message;
       rows = [];
     }
-
     return { message: message, rows: rows };
   }
 }

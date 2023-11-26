@@ -1,12 +1,10 @@
 import { pool } from "./Conexion DB/conection-db.js";
 class CD_oclusion {
-
     //LISTAR
     async listoclusion(DNI) {
         var message = "";
         var rows;
         try {
-            // codigo asincorno, consulta sql listar empleados
             [[rows]] = await pool.query("call listar_oclusion (?);",[DNI]);
         } catch (error) {
             message = "Algo salió mal en CD - " +error ;
@@ -19,23 +17,22 @@ class CD_oclusion {
         var message = "";
         var result = { affectedRows: 0 };
         try {
-            // Implementa la consulta SQL para crear una nueva cita en la base de datos
-            [result] = await pool.query(
+            [[[result]]] = await pool.query(
                 "CALL crear_oclusion (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
                 [DNI, MOLARDER, MOLARIZQ, CANINADER, CANINAIZQ, OVERBITE, OVERJET, RELCENTRICA, GCANDER, GCANIZQ, GANT, SAGITAL, VERTICAL, HORIZONTAL, POSTURAL, OCLUSIAL, ESPACLIBRE]
             );
+            result = { affectedRows: 1, row: result }
         } catch (error) {
-            message = "Algo salió mal en CD - " +error ;
-            result.insertId = 0;
+            message = "Algo salió mal en CD, Servidor: "+ error.message;
+            result.affectedRows = 0;
         }
-        return { message: message, affectedRows: result.affectedRows };
+        return { message: message, affectedRows: result.affectedRows, row: result.row };
     }
     // EDITAR
     async updateoclusion(CODIGO, MOLARDER, MOLARIZQ, CANINADER, CANINAIZQ, OVERBITE, OVERJET, RELCENTRICA, GCANDER, GCANIZQ, GANT, SAGITAL, VERTICAL, HORIZONTAL, POSTURAL, OCLUSIAL, ESPACLIBRE) {
         var message = "";
         var result = { affectedRows: 0 };
         try {
-            // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(
                 "CALL editar_oclusion (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
                 [CODIGO, MOLARDER, MOLARIZQ, CANINADER, CANINAIZQ, OVERBITE, OVERJET, RELCENTRICA, GCANDER, GCANIZQ, GANT, SAGITAL, VERTICAL, HORIZONTAL, POSTURAL, OCLUSIAL, ESPACLIBRE]

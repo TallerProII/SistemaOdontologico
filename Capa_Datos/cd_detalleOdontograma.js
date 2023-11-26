@@ -6,7 +6,6 @@ class CD_detalleOdontograma {
         var message = "";
         var rows;
         try {
-            // codigo asincorno, consulta sql listar empleados
             [[rows]] = await pool.query("call listar_detalle_odontograma (?);",[DNI]);
         } catch (error) {
             message = "Algo salió mal en CD - " +error ;
@@ -19,23 +18,22 @@ class CD_detalleOdontograma {
         var message = "";
         var result = { affectedRows: 0 };
         try {
-            // Implementa la consulta SQL para crear una nueva cita en la base de datos
-            [result] = await pool.query(
+            [[[result]]] = await pool.query(
                 "CALL crear_detalle_odontograma(?, ?, ?, ?, ?, ?,?)",
                 [DNI, tratamiento, cuadrante, diente, sector, estado, notas]
             );
+            result = { affectedRows: 1, row: result }
         } catch (error) {
-            message = "Algo salió mal en CD - " +error ;
-            result.insertId = 0;
+            message = "Algo salió mal en CD, Servidor: "+ error.message;
+            result.affectedRows = 0;
         }
-        return { message: message, affectedRows: result.affectedRows };
+        return { message: message, affectedRows: result.affectedRows, row: result.row };
     }
     // EDITAR
     async updateDetodont( id, tratamiento, cuadrante, diente, sector, estado, notas) {
         var message = "";
         var result = { affectedRows: 0 };
         try {
-            // Implementa la consulta SQL para crear una nueva cita en la base de datos
             [result] = await pool.query(
                 "CALL editar_detalle_odontograma(?, ?, ?, ?, ?, ?,?)",
                 [id, tratamiento, cuadrante, diente, sector, estado, notas]

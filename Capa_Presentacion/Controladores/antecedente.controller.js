@@ -6,7 +6,7 @@ var objCapaNegocio = new CN_antecedente();
 export const listantecedente = async (req, res) => {
   try {
     const { DNI } = req.params;
-    const respuesta = await objCapaNegocio.listantecedente(DNI);  // Aquí asumo que listantecedente está definido en objCapaDato
+    const respuesta = await objCapaNegocio.listantecedente(DNI); 
     res.json(respuesta);
   } catch (error) {
     return res.status(500).json({ message: "Algo salió mal en CP - " + error });
@@ -22,15 +22,12 @@ export const createantecedente = async (req, res) => {
     return res.status(500).json({ message: "Algo salió mal en CP - " + error });
   }
 };
-
 //ACTUALIZAR 
 export const updateantecedente = async (req, res) => {
   try {
     const { CODIGO } = req.params;  //const id = req.params.id;
     const { personal, patologico, alergia, familiar } = req.body;
-
     const result = await objCapaNegocio.updateantecedente ( CODIGO, personal, patologico, alergia, familiar );
-
     if (result.affectedRows === 0)
       return res.status(404).json({ message: result.message });
 
@@ -39,14 +36,11 @@ export const updateantecedente = async (req, res) => {
     return res.status(500).json({ message: "Algo salió mal en CP - " + error });
   }
 };
-
 //ELIMINAR 
-
 export const deleteantecedente = async (req, res) => {
   try {
     const { id } = req.params;
     const result = await objCapaNegocio.deleteantecedente(id);
-
     if (result.affectedRows <= 0) {
       return res.status(404).json({ message: result.message });
     }
@@ -55,5 +49,3 @@ export const deleteantecedente = async (req, res) => {
     return res.status(500).json({ message: "Algo salió mal en CP - " + error });
   }
 };
-
-

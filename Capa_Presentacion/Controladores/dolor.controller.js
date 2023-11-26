@@ -6,7 +6,7 @@ var objCapaNegocio = new CN_dolor();
 export const listdolor = async (req, res) => {
   try {
     const { DNI } = req.params;
-    const respuesta = await objCapaNegocio.listdolor(DNI);  // Aquí asumo que listdolor está definido en objCapaDato
+    const respuesta = await objCapaNegocio.listdolor(DNI);
     res.json(respuesta);
   } catch (error) {
     return res.status(500).json({ message: "Algo salió mal en CP - " + error });
@@ -22,31 +22,24 @@ export const createdolor = async (req, res) => {
     return res.status(500).json({ message: "Algo salió mal en CP - " + error });
   }
 };
-
 //ACTUALIZAR
 export const updatedolor = async (req, res) => {
   try {
-    const { CODIGO } = req.params;  //const id = req.params.id;
+    const { CODIGO } = req.params;
     const { MUSCULO, TEMPORAL, MASETERO, PTEINTERNO, PTEEXTERNO, DIGASTRICO, ESTERNOC } = req.body;
-
     const result = await objCapaNegocio.updatedolor ( CODIGO, MUSCULO, TEMPORAL, MASETERO, PTEINTERNO, PTEEXTERNO, DIGASTRICO, ESTERNOC );
-
     if (result.affectedRows === 0)
       return res.status(404).json({ message: result.message });
-
     res.json(result);
   } catch (error) {
     return res.status(500).json({ message: "Algo salió mal en CP - " + error });
   }
 };
-
 //ELIMINAR
-
 export const deletedolor = async (req, res) => {
   try {
     const { id } = req.params;
     const result = await objCapaNegocio.deletedolor(id);
-
     if (result.affectedRows <= 0) {
       return res.status(404).json({ message: result.message });
     }
@@ -55,5 +48,3 @@ export const deletedolor = async (req, res) => {
     return res.status(500).json({ message: "Algo salió mal en CP - " + error });
   }
 };
-
-

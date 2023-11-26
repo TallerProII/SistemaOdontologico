@@ -6,7 +6,6 @@ class CD_Cita {
         var message = "";
         var rows;
         try {
-            // codigo asincorno, consulta sql listar empleados
             [[rows]] = await pool.query("call listar_cita();");
         } catch (error) {
             message = "Algo salió mal en CD";
@@ -19,18 +18,17 @@ class CD_Cita {
         var message = "";
         var result = { affectedRows: 0 };
         try {
-            // Implementa la consulta SQL para crear una nueva cita en la base de datos
-            [result] = await pool.query(
+            [[[result]]] = await pool.query(
                 "CALL crear_cita(?, ?, ?, ?, ?, ?)",
                 [IDCita, IDMedico, citMotivo, citFecha, citHora, citEstado]
             );
+            result = { affectedRows: 1, row: result }
         } catch (error) {
             message = "Algo salió mal en CD, Servidor: "+ error.message;
             result.affectedRows = 0;
         }
-        return { message: message, affectedRows: result.affectedRows };
+        return { message: message, affectedRows: result.affectedRows, row: result.row };
     }
-
     //ACTUALIZAR
     async updateCita(idCita, medicoId, estado, tratamiento, fecha, hora) {
         var message = "";

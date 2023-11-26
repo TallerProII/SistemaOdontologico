@@ -11,7 +11,6 @@ export const listHistoriaClinica = async (req, res) => {
     return res.status(500).json({ message: "Algo salió mal en CP - ", error: error.message });
   }
 };
-
 // CREAR
 export const createHistoriaClinica = async (req, res) => {
   try {
@@ -22,31 +21,24 @@ export const createHistoriaClinica = async (req, res) => {
     return res.status(500).json({ message: "Algo salió mal en CP - ", error: error.message });
   }
 };
-
-// ACTUALIZAR HISTORIA CLÍNICA
+// ACTUALIZAR
 export const updateHistoriaClinica = async (req, res) => {
   try {
     const { id } = req.params;
     const { IDPaciente, Fecha, Hora, Ectoscopia } = req.body;
-
     const result = await objHistoriaClinica.updateHistoriaClinica(id, IDPaciente, Fecha, Hora, Ectoscopia);
-
     if (result.affectedRows === 0) return res.status(404).json({ message: result.message });
-
     res.json(result);
   } catch (error) {
     return res.status(500).json({ message: "Algo salió mal en CP - ", error: error.message });
   }
 };
-
 // ELIMINAR
 export const deleteHistoriaClinica = async (req, res) => {
   try {
     const { id } = req.params;
     const result = await objHistoriaClinica.deleteHistoriaClinica(id);
-
     if (result.affectedRows <= 0) return res.status(404).json({ message: result.message });
-
     res.status(204).json(result);
   } catch (error) {
     return res.status(500).json({ message: "Algo salió mal en CP - ", error: error.message });

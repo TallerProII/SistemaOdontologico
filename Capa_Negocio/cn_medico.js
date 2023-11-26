@@ -10,26 +10,7 @@ class CN_medico {
   //LISTAR
   async listmedico() {
     var resultado = await objCapaDato.listmedico();
-
-    // citEstado Activo Finalizado cancelado
-    for (var i = 0; i < resultado["rows"].length; i++) {
-      // Verificar si la fecha es una cadena
-      var fechaOriginal = resultado["rows"][i]["medFechN"];
-      var fechaSinTiempo;
-
-      if (typeof fechaOriginal === "string") {
-        fechaSinTiempo = fechaOriginal.split("T")[0];
-      } else if (fechaOriginal instanceof Date) {
-        // Si ya es un objeto Date, formatear la fecha
-        var dia = ("0" + fechaOriginal.getDate()).slice(-2);
-        var mes = ("0" + (fechaOriginal.getMonth() + 1)).slice(-2);
-        var anio = fechaOriginal.getFullYear();
-        fechaSinTiempo = dia + "-" + mes + "-" + anio;
-      }
-
-      resultado["rows"][i]["medFechN"] = fechaSinTiempo;
       return resultado;
-  }
   }
   //CREAR
   async createmedico( USUARIO, NOMBRE, APELLIDO, DNI, DIREC, TELEF, CORREO, SEXO, FECHA, ESPECIALIDAD, CIVIL, CUENTA, CONTRA, ESTADO) {

@@ -19,7 +19,7 @@ const validarNumero = (campo, nombreCampo) => {
 };
 
 const validarString = (campo, nombreCampo) => {
-  const mensajeCampoVacio = validarCampo(campo, nombreCampo);
+  const mensajeCampoVacio = validarCampo(String(campo), nombreCampo);
   if (mensajeCampoVacio) {
     return mensajeCampoVacio;
   }

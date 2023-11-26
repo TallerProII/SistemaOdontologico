@@ -9,13 +9,13 @@ import {
 const router = Router();
 
 
-// Crear paciente
+// Crear
 router.post("/createPaciente", createPaciente);
-//Actualizar paciente
+//Actualizar
 router.patch("/updatePaciente/:id", updatePaciente);
-//Listar paciente
+//Listar
 router.get("/listPaciente/", listPaciente);
-// DELETE paciente
+// DELETE
 router.delete("deletePaciente/:id",deletePaciente);
 
 

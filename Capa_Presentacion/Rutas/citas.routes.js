@@ -9,13 +9,13 @@ import {
 const router = Router();
 
 
-// Crear una cita
+// Crear
 router.post("/createCita", createCita);
-//Actualizar cita
+//Actualizar
 router.patch("/updateCita/:id", updateCita);
-//Listar cita
+//Listar
 router.get("/listCita", listCita);
-// DELETE un empleado
+// DELETE
 router.delete("/deleteCita/:id", deleteCita);
 
 

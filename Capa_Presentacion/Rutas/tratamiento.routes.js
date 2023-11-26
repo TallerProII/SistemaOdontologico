@@ -8,13 +8,13 @@ import {
 
 const router = Router();
 
-//Listar Tratamiento
+//Listar
 router.get("/listTratamiento", listTratamiento);
-// Crear una Tratamiento
+// Crear
 router.post("/createTratamiento", createTratamiento);
-//Actualizar Tratamiento
+//Actualizar
 router.patch("/updateTratamiento/:IDTratamiento", updateTratamiento);
-// DELETE un empleado
+// DELETE
 router.delete("/deleteTratamiento/:IDTratamiento", deleteTratamiento);
 
 export default router;

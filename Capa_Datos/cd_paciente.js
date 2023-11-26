@@ -15,36 +15,35 @@ class CD_Paciente {
     // CREAR
     async createPaciente(NOMBRES, APELLIDOS, DNI, SEXO, RELIGION,RAZA,FECHA, LUGAR, RESIDENCIA, GRADO, OCUPACION, CIVIL, CORREO, TELEFONO, ESTADO, ECTOSCOPIA) {
         var message = "";
-        var result = { affectedRows: 0 }; // Inicializa result con un valor predeterminado
+        var result = { affectedRows: 0 };
     
         try {
-        // Implementa la consulta SQL para crear un nuevo familiar en la base de datos
-        [result] = await pool.query(
-            "CALL crear_paciente (?, ?, ?, ?, ?, ?,?,?, ?, ?, ?, ?, ?,?,?,?)",
-            [NOMBRES, APELLIDOS, DNI, SEXO, RELIGION,RAZA,FECHA, LUGAR, RESIDENCIA, GRADO, OCUPACION, CIVIL, CORREO, TELEFONO, ESTADO, ECTOSCOPIA]
-        );
+            [[[result]]] = await pool.query(
+                "CALL crear_paciente (?, ?, ?, ?, ?, ?,?,?, ?, ?, ?, ?, ?,?,?,?)",
+                [NOMBRES, APELLIDOS, DNI, SEXO, RELIGION,RAZA,FECHA, LUGAR, RESIDENCIA, GRADO, OCUPACION, CIVIL, CORREO, TELEFONO, ESTADO, ECTOSCOPIA]
+            );
+            result = { affectedRows: 1, row: result }
         } catch (error) {
-        message = "Algo salió mal en CD - " + error;
+            message = "Algo salió mal en CD, Servidor: "+ error.message;
+            result.affectedRows = 0;
         }
-    
-        return { message: message, affectedRows: result.affectedRows };
-    }
-    // CREAR
+        return { message: message, affectedRows: result.affectedRows, row: result.row };
+        }   
+    // EDITAR
     async updatePaciente(id,NOMBRES, APELLIDOS, DNI, SEXO, RELIGION,RAZA,FECHA, LUGAR, RESIDENCIA, GRADO, OCUPACION, CIVIL, CORREO, TELEFONO, ESTADO, ECTOSCOPIA) {
         var message = "";
-        var result = { affectedRows: 0 }; // Inicializa result con un valor predeterminado
-    
+        var result = { affectedRows: 0 };    
         try {
-        // Implementa la consulta SQL para crear un nuevo familiar en la base de datos
         [result] = await pool.query(
             "CALL editar_paciente (?,?, ?, ?, ?, ?, ?,?,?, ?, ?, ?, ?, ?,?,?,?)",
             [id, NOMBRES, APELLIDOS, DNI, SEXO, RELIGION,RAZA,FECHA, LUGAR, RESIDENCIA, GRADO, OCUPACION, CIVIL, CORREO, TELEFONO, ESTADO, ECTOSCOPIA]
         );
+            result = { affectedRows: 1, row: result }
         } catch (error) {
-        message = "Algo salió mal en CD - " + error;
+            message = "Algo salió mal en CD, Servidor: "+ error.message;
+            result.affectedRows = 0;
         }
-    
-        return { message: message, affectedRows: result.affectedRows };
+        return { message: message, affectedRows: result.affectedRows, row: result.row };
     }
 }
 

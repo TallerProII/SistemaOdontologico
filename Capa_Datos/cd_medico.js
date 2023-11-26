@@ -1,6 +1,5 @@
 import { pool } from "./Conexion DB/conection-db.js";
 class CD_medico {
-
     //LISTAR
     async listmedico() {
         var message = "";
@@ -18,15 +17,16 @@ class CD_medico {
         var message = "";
         var result = { affectedRows: 0 };
         try {
-            [result] = await pool.query(
+            [[[result]]] = await pool.query(
                 "CALL crear_medico (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                 [ USUARIO, NOMBRE, APELLIDO, DNI, DIREC, TELEF, CORREO, SEXO, FECHA, ESPECIALIDAD, CIVIL, CUENTA, CONTRA, ESTADO]
             );
+            result = { affectedRows: 1, row: result }
         } catch (error) {
-            message = "Algo salió mal en CD - " +error ;
-            result.insertId = 0;
+            message = "Algo salió mal en CD, Servidor: "+ error.message;
+            result.affectedRows = 0;
         }
-        return { message: message, affectedRows: result.affectedRows };
+        return { message: message, affectedRows: result.affectedRows, row: result.row };
     }
     // EDITAR
     async updatemedico(CODIGO, USUARIO, NOMBRE, APELLIDO, DNI, DIREC, TELEF, CORREO, SEXO, FECHA, ESPECIALIDAD, CIVIL, CUENTA, CONTRA, ESTADO) {

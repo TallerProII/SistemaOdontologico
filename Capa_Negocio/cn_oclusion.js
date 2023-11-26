@@ -11,7 +11,6 @@ class CN_oclusion {
   }
   //CREAR
   async createoclusion(DNI, MOLARDER, MOLARIZQ, CANINADER, CANINAIZQ, OVERBITE, OVERJET, RELCENTRICA, GCANDER, GCANIZQ, GANT, SAGITAL, VERTICAL, HORIZONTAL, POSTURAL, OCLUSIAL, ESPACLIBRE) {
-    // Validaciones
     const mensajesErrores = [
       this.validarString(String(DNI), "DNI"),
       this.validarString(MOLARDER, "MOLARDER"),
@@ -31,25 +30,17 @@ class CN_oclusion {
       this.validarString(OCLUSIAL, "OCLUSIAL"),
       this.validarString(ESPACLIBRE, "ESPACLIBRE"),
     ];
-
-    // Filtra los mensajes de error que no son nulos
     const erroresFiltrados = mensajesErrores.filter((mensaje) => mensaje !== null);
-
     if (erroresFiltrados.length > 0) {
       return { message: erroresFiltrados.join("\n"), id: 0 };
     }
-
-    // Validación adicional
     if (!DNI || (String(DNI.trim().length) === 8 && !isNaN(DNI.trim()))) {
       return { message: "Debe seleccionar algún paciente", id: 0 };
     }
-
-    // Si todas las validaciones son exitosas, procede a la creación
     return await objCapaDato.createoclusion(DNI, MOLARDER, MOLARIZQ, CANINADER, CANINAIZQ, OVERBITE, OVERJET, RELCENTRICA, GCANDER, GCANIZQ, GANT, SAGITAL, VERTICAL, HORIZONTAL, POSTURAL, OCLUSIAL, ESPACLIBRE);
   }
   //CREAR
   async updateoclusion(CODIGO, MOLARDER, MOLARIZQ, CANINADER, CANINAIZQ, OVERBITE, OVERJET, RELCENTRICA, GCANDER, GCANIZQ, GANT, SAGITAL, VERTICAL, HORIZONTAL, POSTURAL, OCLUSIAL, ESPACLIBRE) {
-    // Validaciones
     const mensajesErrores = [
         this.validarString(MOLARDER, "MOLARDER"),
         this.validarString(MOLARIZQ, "MOLARIZQ"),
@@ -68,23 +59,15 @@ class CN_oclusion {
         this.validarString(OCLUSIAL, "OCLUSIAL"),
         this.validarString(ESPACLIBRE, "ESPACLIBRE"),
     ];
-
-    // Filtra los mensajes de error que no son nulos
     const erroresFiltrados = mensajesErrores.filter((mensaje) => mensaje !== null);
-
     if (erroresFiltrados.length > 0) {
       return { message: erroresFiltrados.join("\n"), id: 0 };
     }
-
-    // Si todas las validaciones son exitosas, procede a la creación
     return await objCapaDato.updateoclusion( CODIGO, MOLARDER, MOLARIZQ, CANINADER, CANINAIZQ, OVERBITE, OVERJET, RELCENTRICA, GCANDER, GCANIZQ, GANT, SAGITAL, VERTICAL, HORIZONTAL, POSTURAL, OCLUSIAL, ESPACLIBRE);
   }
   //ELIMINAR
   async deleteoclusion(id) {
-      //filtos - reglas de negocio
-
       return await objCapaDato.deleteoclusion(id);
   }
 }
-
 export default CN_oclusion;

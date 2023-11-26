@@ -1,12 +1,10 @@
 import { pool } from "./Conexion DB/conection-db.js";
 class CD_familiar {
-
     //LISTAR
     async listFamiliar (DNI) {
         var message = "";
         var rows;
         try {
-            // codigo asincorno, consulta sql listar empleados
             [[rows]] = await pool.query("call listar_familiar (?);",[DNI]);
         } catch (error) {
             message = "Algo salió mal en CD - "+error;
@@ -17,27 +15,24 @@ class CD_familiar {
     // CREAR
     async createFamiliar(DNI, nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono) {
         var message = "";
-        var result = { affectedRows: 0 }; // Inicializa result con un valor predeterminado
-    
+        var result = { affectedRows: 0 };    
         try {
-        // Implementa la consulta SQL para crear un nuevo familiar en la base de datos
-        [result] = await pool.query(
+        [[[result]]] = await pool.query(
             "CALL crear_familiar (?, ?, ?, ?, ?, ?,?,?)",
             [DNI, nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono]
         );
+        result = { affectedRows: 1, row: result }
         } catch (error) {
-        message = "Algo salió mal en CD - " + error;
+            message = "Algo salió mal en CD, Servidor: "+ error.message;
+            result.affectedRows = 0;
         }
-    
-        return { message: message, affectedRows: result.affectedRows };
+        return { message: message, affectedRows: result.affectedRows, row: result.row };
     }
     // EDITAR
     async updateFamiliar(id,  nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono) {
         var message = "";
-        var result = { affectedRows: 0 }; // Inicializa result con un valor predeterminado
-    
+        var result = { affectedRows: 0 };    
         try {
-        // Implementa la consulta SQL para crear un nuevo familiar en la base de datos
         [result] = await pool.query(
             "CALL editar_familiar (?, ?, ?, ?, ?, ?,?,?)",
             [id,  nombres, apellidos, DNIF, parentezco, ocupacion, correo, telefono]
