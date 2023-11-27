@@ -1,6 +1,8 @@
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
+import bodyParser from "body-parser";
+import fileUpload from "express-fileupload";
 
 import employeesRoutes from "../Rutas/employees.routes.js";
 import citasRoutes from "../Rutas/citas.routes.js";
@@ -35,7 +37,14 @@ const corsOptions = {
 // Middlewares
 app.use(cors(corsOptions));
 app.use(morgan("dev"));
-app.use(express.json());
+// app.use(express.json()); 
+// Utiliza body-parser para analizar solicitudes POST
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(fileUpload({
+  createParentPath:true
+}))
+
 
 // Routes
 app.use("/", employeesRoutes);
