@@ -61,6 +61,10 @@ class CN_PACIENTE {
       return { message: erroresFiltrados.join("\n"), id: 0 };
     }
     return await objCapaDato.updatePaciente(id, NOMBRES, APELLIDOS, DNI, SEXO, RELIGION, RAZA, FECHA, LUGAR, RESIDENCIA, GRADO, OCUPACION, CIVIL, CORREO, TELEFONO, ESTADO, ECTOSCOPIA);
-  }
+  }  
+  //ELIMINAR
+  async deletePaciente(id) {
+    return await objCapaDato.deletePaciente(id);
+}
 }
 export default CN_PACIENTE;
